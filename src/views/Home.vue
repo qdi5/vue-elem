@@ -12,8 +12,8 @@ import request from 'utils/request'
 export default {
   name: 'home',
   created () {
-    request.get('http://api.wuzhe.online/article/page/1').then(data => {
-      console.log('请求到的文章数据：\n', data)
+    request.get('/api/seller').then(data => {
+      console.log('请求到的商家数据：\n', data)
     })
   }
 }
