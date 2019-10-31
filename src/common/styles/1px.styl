@@ -1,0 +1,44 @@
+@import './mixin/mixin.styl';
+
+.border-1px, .border-1px-t, .border-1px-b, .border-1px-tb, .border-1px-l, .border-1px-r {
+  position: relative
+}
+
+.border-1px {
+  &:before {
+    setLine()
+  }
+}
+
+.border-1px-t {
+  &:before {
+    setTopLine()
+  }
+}
+
+.border-1px-b {
+  &:after {
+    setBottomLine()
+  }
+}
+
+.border-1px-tb {
+  &:before {
+    setTopLine()
+  }
+  &:after {
+    setBottomLine()
+  }
+}
+
+.border-1px-l {
+  &:before {
+    setLeftLine()
+  }
+}
+
+.border-1px-r {
+  &:after {
+    setRightLine()
+  }
+}

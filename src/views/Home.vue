@@ -1,7 +1,8 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">    
-    
+  <div class="home">    
+    <div class="border-1px">
+      I am goods
+    </div>
   </div>
 </template>
 
@@ -18,3 +19,7 @@ export default {
   }
 }
 </script>
+
+<style lang="stylus">
+  
+</style>

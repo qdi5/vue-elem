@@ -1,0 +1,89 @@
+setLine($c=#C7C7C7) {
+  content: " ";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 200%;
+  border: 1px solid $c;
+  color: $c;
+  height: 200%;
+  transform-origin: left top;
+  transform: scale(0.5);
+}
+
+setTopLine($c=#C7C7C7) {
+    content: " ";
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    height: 1px;
+    border-top: 1px solid $c;
+    color: $c;
+    transform-origin: 0 0;
+    transform: scaleY(0.5);
+}
+
+setBottomLine($c=#C7C7C7) {
+    content: " ";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    height: 1px;
+    border-bottom: 1px solid $c;
+    color: $c;
+    transform-origin: 0 100%;
+    transform: scaleY(0.5);
+}
+
+setLeftLine($c=#C7C7C7) {
+    content: " ";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 1px;
+    bottom: 0;
+    border-left: 1px solid $c;
+    color: $c;
+    transform-origin: 0 0;
+    transform: scaleX(0.5);
+}
+
+setRightLine($c=#C7C7C7) {
+    content: " ";
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 1px;
+    bottom: 0;
+    border-right: 1px solid $c;
+    color: $c;
+    transform-origin: 100% 0;
+    transform: scaleX(0.5);
+}
+/*
+min-resolution:
+用于描述媒体查询中的分辨率的<resolution>css数据类型表示
+输出设备的像素密度（ppi）。
+*/
+bg-image($url, $ext=".png")
+  background-image: url($url + '@2x' + $ext)
+  @media (min-resolution: 3dppx)
+    background-image: url($url + '@3x' + $ext)
+
+// 多行文本省略号
+multi-ellipsis($line=2)
+  display: -webkit-box
+  -webkit-line-clamp: $line
+  -webkit-box-orient: vertical
+  text-overflow: ellipsis
+  word-break: break-all
+  overflow: hidden
+
+functions = constant env
+safe-area-fn(fn, position)
+  s("%s(safe-area-inset-%s)", fn, position)
+safe-area-mixin(property, position, important = false)
+  for fn in functions
+    {property} safe-area-fn(fn, position) important == true ? !important : unquote("")

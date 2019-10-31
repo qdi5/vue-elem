@@ -1,0 +1,61 @@
+/*=== 移动端1px边框 begin===*/
+/* @media (-webkit-min-device-pixel-ratio: 1.5),(min-device-pixel-ratio: 1.5)
+  .border-1px
+    &::after
+      transform: scaleY(0.7)
+
+@media (-webkit-min-device-pixel-ratio: 2),(min-device-pixel-ratio: 2)
+  .border-1px
+    &::after
+      transform: scaleY(0.5) */
+/*=== 移动端1px边框 end===*/
+@import './1px.styl'
+
+body {
+  // 开启移动端快速滚动和回弹
+  -webkit-overflow-scrolling: touch
+}
+input,
+button 
+  outline: 0
+  -webkit-appearance: none
+  border-radius: 0
+.flex-h, .flex-v 
+  display: flex
+  flex-wrap: wrap
+  &.nowrap 
+    flex-wrap: nowrap
+  /* 左右间距相等 */  
+  &.around
+    justify-content: space-around
+  /* 两端对齐 */
+  &.justify
+    justify-content: space-between
+
+// flex横向布局
+.flex-h
+  flex-direction: row
+
+// flex横向布局
+.flex-v
+  flex-direction: column
+
+// 水平居中
+.flex-h-center
+  justify-content: center
+
+// 垂直居中
+.flex-v-center
+  align-items: center
+
+// 单行文本溢出省略号
+.ellipsis 
+  white-space: nowrap
+  text-overflow: normal 
+  text-overflow: ellipsis
+  overflow: hidden
+
+
+  
+ 
+
