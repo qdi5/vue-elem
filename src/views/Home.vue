@@ -1,22 +1,15 @@
 <template>
   <div class="home">    
-    <div class="border-1px">
-      I am goods
-    </div>
+    
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import request from 'utils/request'
+
 
 export default {
-  name: 'home',
-  created () {
-    request.get('/api/seller').then(data => {
-      console.log('请求到的商家数据：\n', data)
-    })
-  }
+  name: 'home'
 }
 </script>
 
