@@ -17,6 +17,9 @@ module.exports = {
       .set('utils', resolve('src/utils'))  
   },
   devServer: {
+    host: "0.0.0.0",
+    disableHostCheck: true,
+    open: true,
     before (app) {
       // 获取商家数据
       app.get('/api/seller', function (req, res) {

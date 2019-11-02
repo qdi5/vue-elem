@@ -81,9 +81,22 @@ multi-ellipsis($line=2)
   word-break: break-all
   overflow: hidden
 
+// 适配刘海屏安全区域
 functions = constant env
 safe-area-fn(fn, position)
   s("%s(safe-area-inset-%s)", fn, position)
 safe-area-mixin(property, position, important = false)
   for fn in functions
     {property} safe-area-fn(fn, position) important == true ? !important : unquote("")
+
+// fixed层
+fixed-element($zIndex=102)
+  position: fixed;
+  top: 0;
+  bottom 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  min-height: 100%;
+  background: #fff;
+  z-index: $zIndex;
