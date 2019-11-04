@@ -20,7 +20,7 @@
           </div>
         </div>
         <div class="more-wrapper" @click="handleClick">
-          <div class="more">
+          <div class="more" @click="detailShow = true">
             <span v-if="seller">{{ seller.supports.length }}个</span>
             <i class="icon-keyboard_arrow_right"></i>
           </div>
@@ -38,7 +38,7 @@
       <div v-if="seller" class="bg-layer" :style="'backgroundImage: url(' + seller.avatar +')'"></div>
     </header>
     <router-view/>
-    <div class="popup-wrapper">
+    <div class="popup-wrapper flex-v">
       <div class="popup">
         <div class="popup-header">
           <h1 class="title">{{ seller.name }}</h1>
@@ -95,7 +95,8 @@ import request from 'utils/request'
 export default {
   data () {
     return {
-      seller: null
+      seller: null,
+      detailShow: false
     }
   },
   created () {
@@ -240,12 +241,7 @@ header
     z-index: -1
 
 .popup
-  min-height: 100%
-  position: relative
-  box-sizing: border-box
-  /* 实现sticky的关键代码*/
-  display: inline-block
-  padding-bottom: 64px
+  flex: 1
 .popup-header
   width: 100%
   height: ((128 + 32 + 32 + 48) / 2)px
@@ -308,8 +304,8 @@ header
 /*=== sticky begin ===*/
 .sticky-wrapper
   width: 100%
+  margin-bottom: 32px;
   /* sticky footer关键代码 */
-  margin: -64px auto 32px auto;
   text-align: center
   .icon-close
     font-size: 32px
