@@ -74,5 +74,10 @@ button
     bg-image('~@/invoice_4')
   &.guarantee
     bg-image('~@/guarantee_4')
- 
+
+// vue过渡：渐隐渐显
+.fade-enter-active, .fade-leave-active
+  transition: all 0.5s
+.fade-enter, .fade-leave-to
+  opacity: 0
 

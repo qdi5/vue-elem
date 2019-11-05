@@ -19,7 +19,9 @@
             </ul>
           </div>
         </div>
-        <div class="more-wrapper" @click="handleClick">
+
+
+        <div class="more-wrapper" @click="detailShow = true">
           <div class="more">
             <span v-if="seller">{{ seller.supports.length }}个</span>
             <i class="icon-keyboard_arrow_right"></i>
@@ -37,57 +39,62 @@
       </div>
       <div v-if="seller" class="bg-layer" :style="'backgroundImage: url(' + seller.avatar +')'"></div>
     </header>
-    <router-view/>
-    <div class="popup-wrapper">
-      <div class="popup">
-        <div class="popup-header">
-          <h1 class="title">{{ seller.name }}</h1>
-          <div class="ratings-wrapper">
-            <div class="ratings flex-h flex-h-center">
-              <span class="icon star"></span>
-              <span class="icon star"></span>
-              <span class="icon star"></span>
-              <span class="icon star"></span>
-              <span class="icon star"></span>
+    <nav class="flex-h nowrap around">
+      <router-link :to="{name: 'goods'}">商品</router-link>
+      <router-link :to="{name: 'ratings'}">评价</router-link>
+      <router-link :to="{name: 'seller'}">商家</router-link>
+    </nav>
+    <main>
+      <router-view/>
+    </main>    
+    <transition name="fade">
+      <div class="popup-wrapper" v-if="detailShow">
+        <div class="popup">
+          <div class="popup-header">
+            <h1 class="title" v-if="seller">{{ seller.name }}</h1>
+            <div class="ratings-wrapper">
+              <div class="ratings flex-h flex-h-center">
+                <span class="icon star"></span>
+                <span class="icon star"></span>
+                <span class="icon star"></span>
+                <span class="icon star"></span>
+                <span class="icon star"></span>
+              </div>
             </div>
+          </div>  
+          <div class="discounts-info">
+            <div class="flex-h flex-v-center theme-title">
+              <span class="line border-1px-t"></span>
+              <span class="text">优惠信息</span>
+              <span class="line border-1px-t"></span>
+            </div>
+            <ul class="disounts-detail-wrapper">
+              <template v-if="seller && seller.supports">      
+                <li class="disounts-detail" v-for="(discount, index) in seller.supports" :key="index">
+                  <i class="icon discounts-icon" :class="classMap[discount.type]"></i>
+                  <span class="ellipsis description">
+                    {{ discount.description }}
+                  </span>
+                </li>
+              </template>
+            </ul>
           </div>
-        </div>  
-        <div class="discounts-info">
-          <div class="flex-h flex-v-center theme-title">
-            <span class="line border-1px-t"></span>
-            <span class="text">优惠信息</span>
-            <span class="line border-1px-t"></span>
+          <div class="shops-notice">
+            <div class="flex-h flex-v-center theme-title">
+              <span class="line border-1px-t"></span>
+              <span class="text">商家公告</span>
+              <span class="line border-1px-t"></span>
+            </div>
+            <p class="notice-content">
+              {{ seller.bulletin }}
+            </p>
           </div>
-          <ul class="disounts-detail-wrapper">
-            <template v-if="seller && seller.supports">      
-              <li class="disounts-detail" v-for="(discount, index) in seller.supports" :key="index">
-                <i class="icon discounts-icon" :class="classMap[discount.type]"></i>
-                <span class="ellipsis description">
-                  {{ discount.description }}
-                </span>
-              </li>
-            </template>
-          </ul>
         </div>
-        <div class="shops-notice">
-          <div class="flex-h flex-v-center theme-title">
-            <span class="line border-1px-t"></span>
-            <span class="text">商家公告</span>
-            <span class="line border-1px-t"></span>
-          </div>
-          <p class="notice-content">
-            {{ seller.bulletin }}
-             粥品香坊其烹饪粥料的秘方源于中国千年古法，在融和现代制作工艺，由世界烹饪大师屈浩先生领衔研发。坚守纯天然、0添加的良心品质深得消费者青睐，发展至今成为粥类的引领品牌。是2008年奥运会和2013年园博会指定餐饮服务商。 
-              粥品香坊其烹饪粥料的秘方源于中国千年古法，在融和现代制作工艺，由世界烹饪大师屈浩先生领衔研发。坚守纯天然、0添加的良心品质深得消费者青睐，发展至今成为粥类的引领品牌。是2008年奥运会和2013年园博会指定餐饮服务商。 
-               粥品香坊其烹饪粥料的秘方源于中国千年古法，在融和现代制作工艺，由世界烹饪大师屈浩先生领衔研发。坚守纯天然、0添加的良心品质深得消费者青睐，发展至今成为粥类的引领品牌。是2008年奥运会和2013年园博会指定餐饮服务商。 
-          </p>
+        <div class="sticky-wrapper">
+          <i class="icon icon-close" @click="detailShow=false"></i>
         </div>
       </div>
-      <div class="sticky-wrapper">
-        <i class="icon icon-close"></i>
-      </div>
-    </div>
-    <div class="bg-layer"></div>
+    </transition>
   </div>
 </template>
 <script>
@@ -95,7 +102,8 @@ import request from 'utils/request'
 export default {
   data () {
     return {
-      seller: null
+      seller: null,
+      detailShow: false
     }
   },
   created () {
@@ -106,9 +114,6 @@ export default {
     })
   },
   methods: {
-    handleClick () {
-      
-    }
   }
 }
 </script>
@@ -307,6 +312,7 @@ header
 
 /*=== sticky begin ===*/
 .sticky-wrapper
+  position: relative
   width: 100%
   /* sticky footer关键代码 */
   margin: -64px auto 32px auto;

@@ -37,7 +37,7 @@ module.exports = {
         })
       })
       
-      // 获取商品数据
+      // 获取评价数据
       app.get('/api/ratings', function (req, res) {
         res.json({
           errno: 0,
