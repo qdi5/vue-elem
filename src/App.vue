@@ -39,10 +39,10 @@
       </div>
       <div v-if="seller" class="bg-layer" :style="'backgroundImage: url(' + seller.avatar +')'"></div>
     </header>
-    <nav class="flex-h nowrap around">
-      <router-link :to="{name: 'goods'}">商品</router-link>
-      <router-link :to="{name: 'ratings'}">评价</router-link>
-      <router-link :to="{name: 'seller'}">商家</router-link>
+    <nav class="flex-h nowrap around nav border-1px-b">
+      <router-link class="nav-item" :to="{name: 'goods'}">商品</router-link>
+      <router-link class="nav-item" :to="{name: 'ratings'}">评价</router-link>
+      <router-link class="nav-item" :to="{name: 'seller'}">商家</router-link>
     </nav>
     <main>
       <router-view/>
@@ -315,13 +315,25 @@ header
   position: relative
   width: 100%
   /* sticky footer关键代码 */
-  margin: -64px auto 32px auto;
+  margin: -64px auto 0 auto;
   text-align: center
   .icon-close
     font-size: 32px
     color: rgba(255, 255, 255, 0.5)
 /*=== sticky end ===*/
 /** popup样式 end */ 
-
-
+.nav
+  height: 40px
+  line-height: 40px
+  &.border-1px-b {
+    &:after {
+      setBottomLine(rgba(7, 17, 27, 0.1))
+    }
+  }
+  .nav-item
+    font-size: 14px;
+    color: rgb(77, 85, 93)
+    font-weight: 200
+  .router-link-active
+    color: rgb(240, 20, 20)
 </style>
