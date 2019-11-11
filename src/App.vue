@@ -19,8 +19,6 @@
             </ul>
           </div>
         </div>
-
-
         <div class="more-wrapper" @click="detailShow = true">
           <div class="more">
             <span v-if="seller">{{ seller.supports.length }}个</span>

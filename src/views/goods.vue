@@ -2,8 +2,11 @@
   <div class="goods flex-h nowrap">    
     <div class="goods-side-menu">
       <ul v-if="titles">
-        <li v-for="(title, index) in titles" :key="index" class="category flex-h flex-v-center flex-h-center border-1px-b">
-          <i class="icon" v-if="title.type >= 0" :class="classMap[title.type]"></i>{{ title.name }}
+        <li v-for="(title, index) in titles" :key="index" class="flex-h flex-v-center category border-1px-b" :class="{ active: index === 1 }">
+          <div class="text">
+            <i class="icon icon" v-if="title.type >= 0" :class="classMap[title.type]"></i>
+            <span class="title-name">{{ title.name }}</span>
+          </div>
         </li>
       </ul>
     </div>
@@ -61,14 +64,20 @@ export default {
   height: 12px
   background-size: 12px 12px
   bg-image('~@/special_3')
+.icon.discount
+   width: 12px
+   height: 12px
+   background-size: 12px 12px
+   bg-image('~@/discount_1')
 .goods-side-menu
   width: 80px
-  flex: 0 0 auto
+  flex: 0 0 80px
   font-size: 12px
   color: #07111b
   background-color: #f3f5f7
   .category
     height: (108 / 2)px
+    padding: 0 10px
     &:after {
       setBottomLine(rgba(7, 17, 27, 0.1))
     } 
@@ -76,9 +85,11 @@ export default {
       background-color: #fff
       color: #07111b
       font-weight: 400
+    .text
+      .icon
+        margin-right: 4px
 .goods-wrapper
   flex: 1
-.goods-wrapper
   .sale-theme
     height: (52/2)px
     line-height: (52/2)px
