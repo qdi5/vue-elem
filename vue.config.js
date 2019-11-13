@@ -19,6 +19,8 @@ module.exports = {
   devServer: {
     host: "0.0.0.0",
     disableHostCheck: true,
+    port: 3006,
+    // 自动启动浏览器
     open: true,
     before (app) {
       // 获取商家数据

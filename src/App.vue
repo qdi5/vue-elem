@@ -42,9 +42,9 @@
       <router-link class="nav-item" :to="{name: 'ratings'}">评价</router-link>
       <router-link class="nav-item" :to="{name: 'seller'}">商家</router-link>
     </nav>
-    <main>
+    <main class="main-wrapper">
       <router-view/>
-    </main>    
+    </main>
     <transition name="fade">
       <div class="popup-wrapper" v-if="detailShow">
         <div class="popup">
@@ -59,7 +59,7 @@
                 <span class="icon star"></span>
               </div>
             </div>
-          </div>  
+          </div>
           <div class="discounts-info">
             <div class="flex-h flex-v-center theme-title">
               <span class="line border-1px-t"></span>
@@ -67,7 +67,7 @@
               <span class="line border-1px-t"></span>
             </div>
             <ul class="disounts-detail-wrapper">
-              <template v-if="seller && seller.supports">      
+              <template v-if="seller && seller.supports">
                 <li class="disounts-detail" v-for="(discount, index) in seller.supports" :key="index">
                   <i class="icon discounts-icon" :class="classMap[discount.type]"></i>
                   <span class="ellipsis description">
@@ -117,7 +117,7 @@ export default {
 </script>
 <style lang="stylus">
 @import "~common/styles/index.styl"
-body 
+body
   safe-area-mixin(padding-bottom, bottom)
 </style>
 <style lang="stylus" scoped>
@@ -233,7 +233,7 @@ header
   background-color: rgba(7, 17 27, 0.8)
   box-sizing: border-box
   overflow: auto
-  .bg-layer 
+  .bg-layer
     position: absolute
     top: 0
     left: 0
@@ -287,13 +287,13 @@ header
   color: #ffffff
   .description
     line-height: 16px
-  
+
   .disounts-detail
     line-height: 12px
     &:not(:last-child)
       margin-bottom: 12px
-      
-.discounts-icon 
+
+.discounts-icon
   width: 16px
   height: 16px
   margin-right: 6px
@@ -307,7 +307,9 @@ header
     font-size: 12px
     font-weight: 400
     line-height: 24px
-
+.main-wrapper
+  fixed-element(10, 174)
+  overflow: hidden
 /*=== sticky begin ===*/
 .sticky-wrapper
   position: relative
@@ -319,7 +321,7 @@ header
     font-size: 32px
     color: rgba(255, 255, 255, 0.5)
 /*=== sticky end ===*/
-/** popup样式 end */ 
+/** popup样式 end */
 .nav
   height: 40px
   line-height: 40px
