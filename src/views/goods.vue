@@ -42,9 +42,32 @@
             </div>
           </div>
           <!-- 加减按钮 end-->
+         
         </div>
       </section>
     </div>
+     <!-- 底部购物车 begin -->
+    <div class="shop-cart-wrapper flex-h flex-v-center">
+      <div class="shop-cart-left flex-h flex-v-center">
+        <div class="shop-cart-icon-wrapper">
+          <div class="shop-cart-icon-outside flex-h flex-v-center flex-h-center">
+            <div class="shop-cart-icon-inner flex-h flex-v-center flex-h-center">
+              <i class="shop-cart-icon icon-shopping_cart"></i>
+            </div>
+          </div>
+        </div>
+        <div class="price">
+          &yen; 0
+        </div>
+      </div>
+      <div class="border-1px-l shop-cart-center">
+        另需配送费&yen; 4元
+      </div>
+      <div class="shop-cart-right">
+        &yen; 20起送
+      </div>
+    </div>
+    <!-- 底部购物车 end -->
   </div>
 </template>
 
@@ -171,5 +194,59 @@ export default {
   .icon-add
     font-size: 21px
     color: rgb(0, 160, 220)
+
+.shop-cart-wrapper
+  position: fixed
+  left: 0
+  right: 0
+  bottom: 0
+  width: 100%
+  height: (94 / 2)px
+  padding-left: ((36 - 22) / 2)px
+  font-size: 16px
+  font-weight: bold
+  color: rgba(255, 255, 255, 0.4) 
+  background-color: #141d27
+.shop-cart-left
+  
+  .price
+    padding: 0 12px
+.shop-cart-center
+  flex: 1
+  font-weight: normal
+  padding-left: 12px
+  &:before {
+      setLeftLine(rgba(255, 255, 255, 0.6))
+      margin-top: -5px
+      margin-bottom: -5px
+    } 
+.shop-cart-right
+  box-sizing: border-box
+  width: (210/2)px
+  height: 100%
+  padding: 0 8px
+  font-size: 12px
+  line-height: (94 / 2)px
+  text-align: center
+  background-color: #2B333B
+  
+.shop-cart-icon-outside
+  position: relative
+  margin-top: -11px
+  width: 56px
+  height: 56px
+  background-color: #141d27
+  border-radius: 50%
+.shop-cart-icon-inner
+  width: 44px
+  height: 44px
+  border-radius: 50%
+  color: rgba(255, 255, 255, 0.4)
+  background-color: #2B343C
+  .shop-cart-icon
+    font-size: 24px
+
+  
+
 
 </style>
