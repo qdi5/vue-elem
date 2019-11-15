@@ -51,8 +51,10 @@
       <div class="shop-cart-left flex-h flex-v-center">
         <div class="shop-cart-icon-wrapper">
           <div class="shop-cart-icon-outside flex-h flex-v-center flex-h-center">
-            <div class="shop-cart-icon-inner flex-h flex-v-center flex-h-center">
+            <div class="shop-cart-icon-inner active flex-h flex-v-center flex-h-center">
+              <div class="goods-number">99</div>
               <i class="shop-cart-icon icon-shopping_cart"></i>
+
             </div>
           </div>
         </div>
@@ -238,13 +240,32 @@ export default {
   background-color: #141d27
   border-radius: 50%
 .shop-cart-icon-inner
+  position: relative
   width: 44px
   height: 44px
   border-radius: 50%
   color: rgba(255, 255, 255, 0.4)
   background-color: #2B343C
+  &.active
+    color: #fff
+    background-color: rgb(0, 160, 220)
   .shop-cart-icon
     font-size: 24px
+  .goods-number
+    position: absolute
+    top: -5px;
+    right: -11px;
+    width: 24px
+    height: 16px
+    line-height: 16px
+    font-size: 9px
+    font-weight: bold
+    border-radius: 12px
+    text-align: center
+    color: #ffffff
+    background-color: rgb(240, 20, 20)
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4)
+    
 
   
 
