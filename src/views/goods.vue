@@ -71,12 +71,12 @@
       <!-- 购物车清单 -->
       <div class="shop-cart-list-wrapper">
          <div class="shop-cart-list">
-           <div class="flex-h flex-v-center justify">
-             <div>购物车</div>
+           <div class="shop-cart-top flex-h flex-v-center justify">
+             <div class="shop-cart-title">购物车</div>
              <div class="clear">清空</div>
            </div>
            <ul class="goods-items-wrapper">
-           	<li class="goods-item flex-h justify" v-for="index in 4" :class="{'border-1px-bottom': index !== 4 - 1}" :key="index">
+           	<li class="goods-item flex-h flex-v-center justify" v-for="index in 4" :class="{'border-1px-b': index !== 4}" :key="index">
               <div class="goods-name">
                 链子核桃黑米粥
               </div>
@@ -230,6 +230,7 @@ export default {
   font-weight: bold
   color: rgba(255, 255, 255, 0.4)
   background-color: #141d27
+  box-sizing: border-box
 .shop-cart-left
 
   .price
@@ -296,22 +297,35 @@ export default {
   color: rgb(7, 17, 27)
   background-color: #fff
   font-size: 14px
-  z-index: 11
+  z-index: -1
   overflow: hidden
 .shop-cart-list
   position: relative
   background: #fff
   z-index: 11
-  
+  .shop-cart-top
+    height: 40px
+    padding: 0 18px
+    border-bottom: 2px solid rgba(7, 17, 27, 0.1)
+    font-size: 12px
+    background-color: #f3f5f7
+  .shop-cart-title
+    font-size: 14px
+    color: rgb(7, 17, 27)
+    font-weight normal
+  .clear
+    color: rgb(0, 160, 220)
   .goods-items-wrapper
     padding: 0 18px
   .goods-item
     height: (96/2)px
+    margin: 0
     padding: 12px 0
+    box-sizing: border-box
 
 .handle-wrapper
   .price
-    color: rgb(7, 17, 27)
+    color: rgb(240, 20, 20)
     margin: 0 12px 0 18px
 .shop-cart-list-mask
   fixed-element(-1, 0)
