@@ -1,5 +1,5 @@
 <template>
-  <div class="goods flex-h nowrap">    
+  <div class="goods flex-h nowrap">
     <div class="goods-side-menu">
       <ul v-if="titles">
         <li v-for="(title, index) in titles" :key="index" class="flex-h flex-v-center category border-1px-b" :class="{ active: index === 1 }">
@@ -42,7 +42,7 @@
             </div>
           </div>
           <!-- 加减按钮 end-->
-         
+
         </div>
       </section>
     </div>
@@ -67,6 +67,27 @@
       </div>
       <div class="shop-cart-right">
         &yen; 20起送
+      </div>
+      <!-- 购物车清单 -->
+      <div class="shop-cart-list-wrapper">
+         <div class="shop-cart-list">
+           <div class="flex-h flex-v-center justify">
+             <div>购物车</div>
+             <div class="clear">清空</div>
+           </div>
+           <ul class="goods-items-wrapper">
+           	<li class="goods-item flex-h justify" v-for="index in 4" :class="{'border-1px-bottom': index !== 4 - 1}" :key="index">
+              <div class="goods-name">
+                链子核桃黑米粥
+              </div>
+              <div class="handle-wrapper">
+                <span class="price">&yen; {{ index }}</span>
+                <div></div>
+              </div>
+            </li>
+           </ul>
+         </div>
+         <div class="shop-cart-list-mask"></div>
       </div>
     </div>
     <!-- 底部购物车 end -->
@@ -118,7 +139,7 @@ export default {
     padding: 0 10px
     &:after {
       setBottomLine(rgba(7, 17, 27, 0.1))
-    } 
+    }
     &.active
       background-color: #fff
       color: #07111b
@@ -148,11 +169,11 @@ export default {
     padding-left: 10px
     .food-name
       font-size: 14px
-      
+
       color: rgb(7,17,27)
       margin: 0 0 6px 0
     .description, .sales-status
-      
+
       font-size: 10px
       color: rgb(147, 153, 159)
     .description
@@ -172,11 +193,11 @@ export default {
   .food-img-wrapper
     width: (114/2)px
     height: (114/2)px
-    img 
+    img
       width: 100%
       height: 100%
 .handle-btn-wrapper
-  position: absolute 
+  position: absolute
   right: 18px
   bottom: 19px
 .handle-btn
@@ -207,10 +228,10 @@ export default {
   padding-left: ((36 - 22) / 2)px
   font-size: 16px
   font-weight: bold
-  color: rgba(255, 255, 255, 0.4) 
+  color: rgba(255, 255, 255, 0.4)
   background-color: #141d27
 .shop-cart-left
-  
+
   .price
     padding: 0 12px
 .shop-cart-center
@@ -221,7 +242,7 @@ export default {
       setLeftLine(rgba(255, 255, 255, 0.6))
       margin-top: -5px
       margin-bottom: -5px
-    } 
+    }
 .shop-cart-right
   box-sizing: border-box
   width: (210/2)px
@@ -231,7 +252,7 @@ export default {
   line-height: (94 / 2)px
   text-align: center
   background-color: #2B333B
-  
+
 .shop-cart-icon-outside
   position: relative
   margin-top: -11px
@@ -265,9 +286,38 @@ export default {
     color: #ffffff
     background-color: rgb(240, 20, 20)
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4)
-    
 
+.shop-cart-list-wrapper
+  position: absolute
+  bottom: (94 / 2)px
+  left: 0
+  right: 0
+  width: 100%
+  color: rgb(7, 17, 27)
+  background-color: #fff
+  font-size: 14px
+  z-index: 11
+  overflow: hidden
+.shop-cart-list
+  position: relative
+  background: #fff
+  z-index: 11
   
+  .goods-items-wrapper
+    padding: 0 18px
+  .goods-item
+    height: (96/2)px
+    padding: 12px 0
+
+.handle-wrapper
+  .price
+    color: rgb(7, 17, 27)
+    margin: 0 12px 0 18px
+.shop-cart-list-mask
+  fixed-element(-1, 0)
+  background-color: rgba(7, 17, 27, 0.6)
+  filter:blur(10px)
+
 
 
 </style>
