@@ -13,7 +13,7 @@
     <div class="goods-wrapper">
       <section v-for="good in goods" :key="good.name" class="food-detail-wrapper">
         <h2 class="sale-theme">{{ good.name }}</h2>
-        <div class="flex-h food-detail border-1px-b" v-for="food in good.foods" :key="food.name">
+        <div class="flex-h food-detail border-1px-b" @click="showFoodDetail(food)" v-for="food in good.foods" :key="food.name">
           <div class="food-img-wrapper">
             <img :src="food.image" alt="food.name">
           </div>
@@ -47,7 +47,7 @@
       </section>
     </div>
      <!-- 底部购物车 begin -->
-    <div class="shop-cart-wrapper flex-h flex-v-center">
+    <div class="shop-cart-wrapper flex-h flex-v-center" @click="isShowShopCart = !isShowShopCart">
       <div class="shop-cart-left flex-h flex-v-center">
         <div class="shop-cart-icon-wrapper">
           <div class="shop-cart-icon-outside flex-h flex-v-center flex-h-center">
@@ -69,7 +69,7 @@
         &yen; 20起送
       </div>
       <!-- 购物车清单 -->
-      <div class="shop-cart-list-wrapper">
+      <div class="shop-cart-list-wrapper" v-show="isShowShopCart" @click.stop="">
          <div class="shop-cart-list">
            <div class="shop-cart-top flex-h flex-v-center justify">
              <div class="shop-cart-title">购物车</div>
@@ -87,22 +87,26 @@
             </li>
            </ul>
          </div>
-         <div class="shop-cart-list-mask"></div>
+         <div class="shop-cart-list-mask" @click="isShowShopCart=false"></div>
       </div>
     </div>
     <!-- 底部购物车 end -->
+    <goods-detail :food="food" @close-goods-detail="closeGoodsDetail" v-if="isShowGoodsDetail"></goods-detail>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
 import request from 'utils/request'
-
+import GoodsDetail from 'components/goods/GoodsDetail'
 export default {
   name: 'ratings',
   data: () => ({
     titles: null,
-    goods: null
+    goods: null,
+    isShowShopCart: false,
+    isShowGoodsDetail: false,
+    food: null
   }),
   created () {
     this.classMap = ['decrease', 'discount', 'special', 'invoice', 'guarantee']
@@ -112,6 +116,19 @@ export default {
       this.titles = data.map(item => ({ name: item.name, type: item.type }))
       this.goods = data
     })
+  },
+  methods: {
+    showFoodDetail (food) {
+      this.food = food
+      this.isShowGoodsDetail = true
+    },
+    closeGoodsDetail () {
+      debugger
+      this.isShowGoodsDetail = false
+    }
+  },
+  components: {
+    GoodsDetail
   }
 }
 </script>

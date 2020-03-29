@@ -4,7 +4,7 @@ const seller = appData.seller
 const goods = appData.goods
 const ratings = appData.ratings
 
-function resolve(dir) {
+function resolve (dir) {
   return path.resolve(__dirname, dir)
 }
 
@@ -17,7 +17,7 @@ module.exports = {
       .set('utils', resolve('src/utils'))  
   },
   devServer: {
-    host: "0.0.0.0",
+    host: '0.0.0.0',
     disableHostCheck: true,
     port: 3006,
     // 自动启动浏览器

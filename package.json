@@ -43,8 +43,9 @@
       "no-multiple-empty-lines": 0,
       "no-trailing-spaces": 0,
       "eol-last": 0,
-	  "no-tabs": 0,
-	  "no-mixed-spaces-and-tabs": 0
+	    "no-tabs": 0,
+      "no-mixed-spaces-and-tabs": 0,
+      "no-debugger": 0
     },
     "parserOptions": {
       "parser": "babel-eslint"
