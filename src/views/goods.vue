@@ -123,7 +123,6 @@ export default {
       this.isShowGoodsDetail = true
     },
     closeGoodsDetail () {
-      debugger
       this.isShowGoodsDetail = false
     }
   },

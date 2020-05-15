@@ -23,6 +23,38 @@
           </div>
         </div>
       </div>
+      <div class="split-area"></div>
+      <div class="goods-info">
+        <h1 class="title">商品介绍</h1>
+        <p class="goods-brief">
+          一碗皮蛋瘦肉粥，总是我到粥店时的不二之选。香浓软滑，饱腹暖心，皮蛋的Q弹与瘦肉的滑嫩伴着粥香溢于满口，让人喝这样的一碗粥也觉得心满意足
+        </p>
+      </div>
+      <div class="split-area"></div>
+    </div>
+    <div class="goods-comments">
+      <h2 class="title">商品评价</h2>
+      <div class="comments-header">
+        <div class="flex-h comments-btn-group border-1px-b">
+          <div class="comments-btn">全部 57</div>
+          <div class="comments-btn recommend">推荐 47</div>
+          <div class="comments-btn bad">吐槽 10</div>
+        </div>
+        <div class="filter border-1px-t">
+          <i class="icon-check_circle"></i>只看有内容的评价
+        </div>
+      </div>
+      <div class="comments-body border-1px-t">
+        <div class="comment-item border-1px-b">
+          <div class="head-wrap flex-h justify">
+            <div class="time">2020-05-16 00:23</div>
+            <div class="user">3******c <img class="avatar" src="http://static.galileo.xiaojukeji.com/static/tms/default_header.png" alt=""> </div>
+          </div>
+          <p class="comment-content">
+            <i class="icon icon-thumb_down"></i> 太少了，不够一个人吃
+          </p>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -55,6 +87,11 @@ export default {
 
 <style scoped lang="stylus">
 @import '~common/styles/mixin/mixin.styl'
+.title
+  margin-bottom: 6px
+  font-size: 15px
+  font-weight: 400
+
 .goods-deatil-wrapper
   fixed-element()
 .food-img-wrapper
@@ -69,15 +106,22 @@ export default {
     width: 100%
     height: 100%
 .food-content
-  padding: 18px 0 8px 18px
-  font-size: 14px
-  font-weight: 700
-  color: rgb(7, 17, 27)
-  line-height: 14px
+  position: relative
+  width: 100%
+  padding: 18px
+  .food-name
+    font-size: 14px
+    font-weight: 700
+    color: rgb(7, 17, 27)
+    line-height: 14px
 .sales-status
+  font-size: 10px
+  color: rgb(147,153,159)
+  line-height: 14px
   .month-sales
     margin-right: 12px
 .prices
+  margin-top: 18px
   .sales-price
     font-size: 10px
     font-weight: normal
@@ -96,8 +140,10 @@ export default {
     .yen
       font-weight: 700
 .addcart-btn-wrapper
+  position:absolute;
+  right:18px;
+  bottom: 18px;
   .addcart-btn
-    width: (148/2) px
     height: (48/2) px
     box-sizing: border-box
     padding: 6px 12px
@@ -107,5 +153,73 @@ export default {
     border-radius: 12px
     background-color: rgb(0, 160, 220)
     text-align: center 
-    
+.split-area
+  width: 100%
+  height: 16px
+  background-color: #f3f5f7
+  border-top: 1px solid rgba(7,17,27,.1)
+  border-bottom: 1px solid rgba(7,17,27,.1)     
+.goods-info
+  padding: 18px
+  .goods-brief
+    padding: 0 8px
+    font-size: 12px
+    font-weight: 200
+    color: rgb(77,85,93)
+    line-height: 24px
+.goods-comments
+  .title
+    padding-left: 18px
+  .comments-header
+    padding: 18px
+    .filter
+      padding: 12px 0
+      font-size: 12px
+      color: rgb(147,153,159)
+      line-height: 24px
+    .comments-btn-group
+      padding-bottom: 18px
+      .comments-btn {
+        padding: 8px 12px
+        font-size: 12px
+        line-height:  16px
+        color: rgb(255,255,255)
+        background-color: rgb(0,160,220)
+        border-radius: 2px
+        &.recommend, 
+        &.bad {
+          color: #4d555d
+        } 
+        &.recommend {
+          color: rbg(77, 85, 93)
+          background-color: rgba(0, 160, 220, .2)
+        }
+        &.bad {
+          background-color: rgba(77,85,93,.2)
+        }
+        & ~ .comments-btn {
+          margin-left: 8px
+        }
+      }
+  .comments-body
+    padding: 0 18px
+    .comment-item
+        padding: 16px 0
+        .head-wrap
+          font-size: 10px
+          color: rgb(147,153,159)
+          line-height: 12px
+          .user
+              line-height: 12px
+          .avatar
+            display: inline-block
+            width: 12px
+            height: 12px
+            border-radius: 50%
+        .comment-content
+          .icon
+            font-size: 12px
+            line-height: 24px
+            color: rgb(147,153,159)
+            
 </style>
