@@ -1,0 +1,83 @@
+@import 'common/styles/mixin/mixin.styl'
+.goods-comments
+  .title
+    padding-left: 18px
+  .comments-header
+    padding: 18px 18px 0
+    .filter
+      display: inline-block
+      padding: 12px 0
+      font-size: 12px
+      color: rgb(147,153,159)
+      line-height: 24px
+      vertical-align: top
+    .text 
+      display: inline-block
+      vertical-align: top
+    .comments-btn-group
+      padding-bottom: 18px
+      .comments-btn {
+        padding: 8px 12px
+        font-size: 12px
+        line-height:  16px
+        color: rgb(255,255,255)
+        background-color: rgb(0,160,220)
+        border-radius: 2px
+        &.recommend, 
+        &.bad {
+          color: #4d555d
+        } 
+        &.recommend {
+          color: rbg(77, 85, 93)
+          background-color: rgba(0, 160, 220, .2)
+        }
+        &.bad {
+          background-color: rgba(77,85,93,.2)
+        }
+        & ~ .comments-btn {
+          margin-left: 8px
+        }
+      }
+
+/* 分割区域块 */
+.split-area
+  width: 100%
+  height: 16px
+  background-color: #f3f5f7
+  border-top: 1px solid rgba(7,17,27,.1)
+  border-bottom: 1px solid rgba(7,17,27,.1) 
+
+/* 评分组件 */
+.rating-star
+  display: inline-block
+  font-size: 0
+  .star-item
+    display: inline-block
+    width: 15px
+    height: 15px
+
+    & ~ .star-item 
+      margin-left: 6px
+    bg-image('~@/star36_on')
+    background-repeat: no-repeat
+    background-size: cover
+    &.off {
+      bg-image('~@/star36_off')
+    }
+    &.half {
+      bg-image('~@/star36_half')
+    }
+  &.star-24 {
+    .star-item {
+      width: 10px
+      height: 10px
+      bg-image('~@/star24_on')
+      &.off {
+        bg-image('~@/star24_off')
+      }
+      &.half {
+        bg-image('~@/star24_half')
+      }
+    }
+  }
+   

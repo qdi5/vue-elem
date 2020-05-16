@@ -309,7 +309,6 @@ header
     line-height: 24px
 .main-wrapper
   fixed-element(10, 174)
-  overflow: hidden
 /*=== sticky begin ===*/
 .sticky-wrapper
   position: relative

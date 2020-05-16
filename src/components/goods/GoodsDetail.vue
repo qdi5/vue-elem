@@ -152,13 +152,7 @@ export default {
     line-height: 12px
     border-radius: 12px
     background-color: rgb(0, 160, 220)
-    text-align: center 
-.split-area
-  width: 100%
-  height: 16px
-  background-color: #f3f5f7
-  border-top: 1px solid rgba(7,17,27,.1)
-  border-bottom: 1px solid rgba(7,17,27,.1)     
+    text-align: center    
 .goods-info
   padding: 18px
   .goods-brief
@@ -168,39 +162,6 @@ export default {
     color: rgb(77,85,93)
     line-height: 24px
 .goods-comments
-  .title
-    padding-left: 18px
-  .comments-header
-    padding: 18px
-    .filter
-      padding: 12px 0
-      font-size: 12px
-      color: rgb(147,153,159)
-      line-height: 24px
-    .comments-btn-group
-      padding-bottom: 18px
-      .comments-btn {
-        padding: 8px 12px
-        font-size: 12px
-        line-height:  16px
-        color: rgb(255,255,255)
-        background-color: rgb(0,160,220)
-        border-radius: 2px
-        &.recommend, 
-        &.bad {
-          color: #4d555d
-        } 
-        &.recommend {
-          color: rbg(77, 85, 93)
-          background-color: rgba(0, 160, 220, .2)
-        }
-        &.bad {
-          background-color: rgba(77,85,93,.2)
-        }
-        & ~ .comments-btn {
-          margin-left: 8px
-        }
-      }
   .comments-body
     padding: 0 18px
     .comment-item
