@@ -126,7 +126,6 @@ export default {
         const goodsItems = this.$refs.goodsItems
         let height = 0
         const allHeight = goodsItems.map((item) => {
-          console.log('item.scrollTop:', item.scrollTop)
           height += item.offsetHeight
           return height
         })
@@ -142,6 +141,9 @@ export default {
     },
     closeGoodsDetail () {
       this.isShowGoodsDetail = false
+    },
+    calcHeight () {
+
     },
     calcCurrentIndex (scrollY) {
       let currentIndex = 0
