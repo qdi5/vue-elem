@@ -1,4 +1,12 @@
+/*
+ * @Date: 2019-10-20 02:56:42
+ * @LastEditors: wuzhe
+ * @LastEditTime: 2020-05-17 20:18:06
+ * @FilePath: \vue.config.js
+ * @Description: 
+ */ 
 const path = require('path')
+const vConsolePlugin = require("vconsole-webpack-plugin");
 const appData = require('./data.json')
 const seller = appData.seller
 const goods = appData.goods
@@ -15,6 +23,17 @@ module.exports = {
       .set('common', resolve('src/common'))
       .set('api', resolve('src/api'))
       .set('utils', resolve('src/utils'))  
+  },
+  configureWebpack: config => {
+    const dev = [
+      new vConsolePlugin({
+        filter: [],  // 需要过滤的入口文件
+        enable: true
+      })
+    ]
+    if (process.env.NODE_ENV === 'development') {
+      config.plugins = [...config.plugins, ...dev]
+    }
   },
   devServer: {
     host: '0.0.0.0',

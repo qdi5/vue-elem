@@ -2,7 +2,7 @@
   <div class="goods flex-h nowrap">
     <div class="goods-side-menu" ref="sideMenu">
       <ul v-if="titles && titles.length">
-        <li v-for="(title, index) in titles" :key="index" class="flex-h flex-v-center category border-1px-b" :class="{ active: index === currentIndex }" ref="menuItems" @click="scrollToGoods(index)">
+        <li v-for="(title, index) in titles" :key="index" class="flex-h flex-v-center category border-1px-b" :class="{ active: index === currentIndex }" ref="menuItems" @click="scrollToGoods(index, $event)">
           <div class="text">
             <i class="icon icon" v-if="title.type >= 0" :class="classMap[title.type]"></i>
             <span class="title-name">{{ title.name }}</span>
@@ -151,7 +151,7 @@ export default {
         let maxIndex = lg - 1
         for (let i = 0; i < lg; i++) {
           // 如果是第一个
-          if (scrollY <= allHeight[0]) {
+          if (scrollY < allHeight[0]) {
             break
             // 如果是最后一个
           } else if (scrollY >= allHeight[maxIndex]) {
@@ -161,6 +161,7 @@ export default {
           } else {
             // 当scrollY大于等于allHeight[i]的时候，说明它已经将当前元素高度滚动完了
             // 所以，当前索引值需要加上1
+            debugger
             if (scrollY >= allHeight[i] && scrollY < allHeight[i + 1]) {
               currentIndex = i + 1
               break
@@ -170,7 +171,9 @@ export default {
       }
       return currentIndex
     },
-    scrollToGoods (index) {
+    scrollToGoods (index, event) {
+      debugger
+      console.log(event, event._constructed)
       this.currentIndex = index
       if (this.GoodsWrapperScroll) {
         this.GoodsWrapperScroll.scrollToElement(this.$refs.goodsItems[index])
@@ -200,6 +203,7 @@ export default {
       this.$nextTick().then(() => {
         if (!this.GoodsWrapperScroll) {
           this.GoodsWrapperScroll = new BScroll(this.$refs.goodsWrapper, {
+            click: true,
             probeType: 3
           })
           this.GoodsWrapperScroll.on('scroll', pos => {

@@ -28,6 +28,7 @@
     "eslint-plugin-vue": "^5.0.0",
     "stylus": "^0.54.7",
     "stylus-loader": "^3.0.2",
+    "vconsole-webpack-plugin": "^1.5.1",
     "vue-template-compiler": "^2.6.10"
   },
   "eslintConfig": {
@@ -43,7 +44,7 @@
       "no-multiple-empty-lines": 0,
       "no-trailing-spaces": 0,
       "eol-last": 0,
-	    "no-tabs": 0,
+      "no-tabs": 0,
       "no-mixed-spaces-and-tabs": 0,
       "no-debugger": 0
     },
