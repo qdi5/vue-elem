@@ -93,7 +93,9 @@
       </div>
     </div>
     <!-- 底部购物车 end -->
-    <goods-detail :food="food" @close-goods-detail="closeGoodsDetail" v-if="isShowGoodsDetail"></goods-detail>
+    <comm-transition name="slide">
+      <goods-detail :food="food" @close-goods-detail="closeGoodsDetail" v-if="isShowGoodsDetail"></goods-detail>
+    </comm-transition>
   </div>
 </template>
 
@@ -101,6 +103,7 @@
 // @ is an alias to /src
 import request from 'utils/request'
 import GoodsDetail from 'components/goods/GoodsDetail'
+import CommTransition from 'common/components/CommTransition'
 import BScroll from 'better-scroll'
 export default {
   name: 'ratings',
@@ -163,7 +166,6 @@ export default {
           } else {
             // 当scrollY大于等于allHeight[i]的时候，说明它已经将当前元素高度滚动完了
             // 所以，当前索引值需要加上1
-            debugger
             if (scrollY >= allHeight[i] && scrollY < allHeight[i + 1]) {
               currentIndex = i + 1
               break
@@ -174,7 +176,6 @@ export default {
       return currentIndex
     },
     scrollToGoods (index, event) {
-      debugger
       console.log(event, event._constructed)
       this.currentIndex = index
       if (this.GoodsWrapperScroll) {
@@ -183,7 +184,8 @@ export default {
     }
   },
   components: {
-    GoodsDetail
+    GoodsDetail,
+    CommTransition
   },
   watch: {
     // 监听titles的变化，初始化better-scroll，或者刷新better-scroll
@@ -461,7 +463,4 @@ export default {
   fixed-element(-1, 0)
   background-color: rgba(7, 17, 27, 0.6)
   filter:blur(10px)
-
-
-
 </style>

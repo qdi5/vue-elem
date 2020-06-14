@@ -1,5 +1,5 @@
 <template>
-  <div class="goods-deatil-wrapper">
+  <div class="goods-detail-wrapper">
     <div class="goods-detail">
       <back-icon :clickAction="closeGoodsDetail"></back-icon>
       <div class="flex-h food-detail border-1px-b">
@@ -92,7 +92,7 @@ export default {
   font-size: 15px
   font-weight: 400
 
-.goods-deatil-wrapper
+.goods-detail-wrapper
   fixed-element()
 .food-img-wrapper
   width: 100%
@@ -178,8 +178,9 @@ export default {
             height: 12px
             border-radius: 50%
         .comment-content
+          font-size: 12px
+          color: rgb(7,17,27)
           .icon
-            font-size: 12px
             line-height: 24px
             color: rgb(147,153,159)
             
