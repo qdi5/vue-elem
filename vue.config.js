@@ -1,7 +1,7 @@
 /*
  * @Date: 2019-10-20 02:56:42
  * @LastEditors: wuzhe
- * @LastEditTime: 2020-05-17 20:18:06
+ * @LastEditTime: 2020-06-15 23:11:42
  * @FilePath: \vue.config.js
  * @Description: 
  */ 
@@ -39,8 +39,8 @@ module.exports = {
     host: '0.0.0.0',
     disableHostCheck: true,
     port: 3006,
-    // 自动启动浏览器
-    open: true,
+    open: true,  // 自动启动浏览器
+    hot: true, // 启动热更新
     before (app) {
       // 获取商家数据
       app.get('/api/seller', function (req, res) {

@@ -31,17 +31,7 @@
               </div>
             </div>
             <!-- 加减按钮 begin-->
-            <div class="handle-btn-wrapper">
-              <div class="handle-btn flex-h flex-v-center" >
-                <div class="decrease-wrapper flex-h flex-v-center flex-h-center">
-                  <i class="icon-decrease icon-remove_circle_outline"></i>
-                </div>
-                <div class="goods-number flex-h flex-v-center flex-h-center">1</div>
-                <div class="add-wrapper flex-h flex-v-center flex-h-center">
-                  <i class="icon-add icon-add_circle"></i>
-                </div>
-              </div>
-            </div>
+            <cart-control></cart-control>
             <!-- 加减按钮 end-->
 
           </div>
@@ -104,6 +94,7 @@
 import request from 'utils/request'
 import GoodsDetail from 'components/goods/GoodsDetail'
 import CommTransition from 'common/components/CommTransition'
+import CartControl from 'components/cartcontrol/CartControl'
 import BScroll from 'better-scroll'
 export default {
   name: 'ratings',
@@ -185,7 +176,8 @@ export default {
   },
   components: {
     GoodsDetail,
-    CommTransition
+    CommTransition,
+    CartControl
   },
   watch: {
     // 监听titles的变化，初始化better-scroll，或者刷新better-scroll
@@ -328,27 +320,7 @@ export default {
     img
       width: 100%
       height: 100%
-.handle-btn-wrapper
-  position: absolute
-  right: 18px
-  bottom: 19px
-.handle-btn
-  .decrease-wrapper,
-  .add-wrapper
-    width: 21px
-    height: 21px
-    font-size: 14px
-    border-radius: 50%
-    box-sizing: border-box
-  .goods-number
-    width: 24px
-    height: 21px
-    font-size: 10px
-    color: rgb(147, 153, 159)
-  .icon-decrease,
-  .icon-add
-    font-size: 21px
-    color: rgb(0, 160, 220)
+
 
 .shop-cart-wrapper
   position: fixed
