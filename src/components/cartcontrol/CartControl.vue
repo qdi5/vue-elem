@@ -57,19 +57,30 @@ export default {
   .icon-add
     font-size: 21px
     color: rgb(0, 160, 220)
+  .icon-decrease
+    // 这里不定义transition，小球旋转就没效果了
+    transition: all .4s linear
+    transform: rotate(0)
+
 // 小球滚动动画
-.move-enter
+.move-enter,
+.move-leave-to
   opacity: 0
-  transform: translate3d(200%, 0, 0)
+  transform: translate3d(24px, 0, 0)
   .inner 
-    transform: rotate(0)       
-             
-.move-enter-active
-  transition: all 0.4s linear
-.move-enter-to  
+    transform: rotate(180deg)
+
+.move-enter-active,
+.move-leave-active
+  transition: all .4s linear
+
+.move-enter-to,
+.move-leave
   opacity: 1
   transform: translate3d(0, 0, 0)
   .inner
-     transform: rotate(180deg)
+     transform: rotate(0deg)
+ 
+
             
 </style>
