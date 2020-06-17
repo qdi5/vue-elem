@@ -29,10 +29,11 @@
                 <span class="sales-price">&yen;{{ food.price }} </span>
                 <span class="origin-price" v-if="typeof food.oldPrice === 'number' && food.oldPrice >= 0">&yen;{{ food.oldPrice }}</span>
               </div>
+              <!-- 加减按钮 begin-->
+              <cart-control></cart-control>
+              <!-- 加减按钮 end-->
             </div>
-            <!-- 加减按钮 begin-->
-            <cart-control></cart-control>
-            <!-- 加减按钮 end-->
+            
 
           </div>
         </section>
@@ -282,34 +283,42 @@ export default {
     background-color: #f3f5f7
   .food-detail
     position: relative
-    height: 94px
     padding: 0 0 18px 18px
     box-sizing: border-box
     &:not(:first-child)
       margin-top: 16px
   .food-content
+    flex: 1
     padding-left: 10px
     .food-name
+      height: 14px
+      line-height: 14px
       font-size: 14px
-
       color: rgb(7,17,27)
-      margin: 0 0 6px 0
-    .description, .sales-status
-
+      margin: 2px 0 8px 0
+    .description, 
+    .sales-status
       font-size: 10px
       color: rgb(147, 153, 159)
+    .sales-status
+      line-height: 10px
+      font-size: 10px
     .description
-      margin-bottom: 6px
-    .sales-price
-      font-size: 10px
-      color: #f01414
-      font-weight: bolder
-    .origin-price
-      margin-left: 4px
-      font-size: 10px
-      color: rgb(147, 153, 159)
-      font-weight: 400
-      text-decoration: line-through
+      line-height: 12px
+      margin-bottom: 8px
+    .prices
+      line-height: 24px
+      font-weight: 700
+      .sales-price
+        font-size: 14px
+        color: #f01414
+        font-weight: normal
+      .origin-price
+        margin-left: 4px
+        font-size: 10px
+        color: rgb(147, 153, 159)
+        font-weight: 400
+        text-decoration: line-through
   .good-rate
     margin-left: 12px
   .food-img-wrapper

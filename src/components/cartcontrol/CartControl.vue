@@ -43,19 +43,19 @@ export default {
 .handle-btn
   .decrease-wrapper,
   .add-wrapper
-    width: 21px
-    height: 21px
+    width: 24px
+    height: 24px
     font-size: 14px
     border-radius: 50%
-    box-sizing: border-box
+    padding: 6px
   .goods-number
-    width: 24px
-    height: 21px
+    width: 12px
+    height: 24px
     font-size: 10px
     color: rgb(147, 153, 159)
   .icon-decrease,
   .icon-add
-    font-size: 21px
+    font-size: 24px
     color: rgb(0, 160, 220)
   .icon-decrease
     // 这里不定义transition，小球旋转就没效果了
