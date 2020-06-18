@@ -1,7 +1,7 @@
 /*
  * @Date: 2019-10-20 02:56:42
  * @LastEditors: wuzhe
- * @LastEditTime: 2020-06-15 23:11:42
+ * @LastEditTime: 2020-06-19 00:14:11
  * @FilePath: \vue.config.js
  * @Description: 
  */ 
@@ -15,7 +15,8 @@ const ratings = appData.ratings
 function resolve (dir) {
   return path.resolve(__dirname, dir)
 }
-
+const env = process.env
+console.log(`NODE_ENV:${env.NODE_ENV};\r\nVUE_APP_MODE：${env.VUE_APP_MODE}`)
 module.exports = {
   chainWebpack: config => {
     config.resolve.alias
@@ -31,7 +32,8 @@ module.exports = {
         enable: true
       })
     ]
-    if (process.env.NODE_ENV === 'development') {
+    if (process.env.NODE_ENV === 'development' && process.env.VUE_APP_MODE !== 'pc') {
+      console.log('不是pc模式')
       config.plugins = [...config.plugins, ...dev]
     }
   },

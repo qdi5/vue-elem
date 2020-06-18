@@ -1,4 +1,4 @@
-@import 'common/styles/mixin/mixin.styl'
+@import './mixin/mixin.styl'
 .goods-comments
   .title
     padding-left: 18px
@@ -46,38 +46,3 @@
   background-color: #f3f5f7
   border-top: 1px solid rgba(7,17,27,.1)
   border-bottom: 1px solid rgba(7,17,27,.1) 
-
-/* 评分组件 */
-.rating-star
-  display: inline-block
-  font-size: 0
-  .star-item
-    display: inline-block
-    width: 15px
-    height: 15px
-
-    & ~ .star-item 
-      margin-left: 6px
-    bg-image('~@/star36_on')
-    background-repeat: no-repeat
-    background-size: cover
-    &.off {
-      bg-image('~@/star36_off')
-    }
-    &.half {
-      bg-image('~@/star36_half')
-    }
-  &.star-24 {
-    .star-item {
-      width: 10px
-      height: 10px
-      bg-image('~@/star24_on')
-      &.off {
-        bg-image('~@/star24_off')
-      }
-      &.half {
-        bg-image('~@/star24_half')
-      }
-    }
-  }
-   
