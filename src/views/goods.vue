@@ -30,60 +30,14 @@
                 <span class="origin-price" v-if="typeof food.oldPrice === 'number' && food.oldPrice >= 0">&yen;{{ food.oldPrice }}</span>
               </div>
               <!-- 加减按钮 begin-->
-              <cart-control></cart-control>
+              <cart-control @add="handleAdd" @decrease="handleDecrease" :data="food"></cart-control>
               <!-- 加减按钮 end-->
             </div>
-            
-
           </div>
         </section>
       </div>
     </div>
-     <!-- 底部购物车 begin -->
-    <div class="shop-cart-wrapper flex-h flex-v-center" @click="isShowShopCart = !isShowShopCart">
-      <div class="shop-cart-left flex-h flex-v-center">
-        <div class="shop-cart-icon-wrapper">
-          <div class="shop-cart-icon-outside flex-h flex-v-center flex-h-center">
-            <div class="shop-cart-icon-inner active flex-h flex-v-center flex-h-center">
-              <div class="goods-number">99</div>
-              <i class="shop-cart-icon icon-shopping_cart"></i>
-
-            </div>
-          </div>
-        </div>
-        <div class="price">
-          &yen; 0
-        </div>
-      </div>
-      <div class="border-1px-l shop-cart-center">
-        另需配送费&yen; 4元
-      </div>
-      <div class="shop-cart-right">
-        &yen; 20起送
-      </div>
-      <!-- 购物车清单 -->
-      <div class="shop-cart-list-wrapper" v-show="isShowShopCart" @click.stop="">
-         <div class="shop-cart-list">
-           <div class="shop-cart-top flex-h flex-v-center justify">
-             <div class="shop-cart-title">购物车</div>
-             <div class="clear">清空</div>
-           </div>
-           <ul class="goods-items-wrapper">
-           	<li class="goods-item flex-h flex-v-center justify" v-for="index in 4" :class="{'border-1px-b': index !== 4}" :key="index">
-              <div class="goods-name">
-                链子核桃黑米粥
-              </div>
-              <div class="handle-wrapper">
-                <span class="price">&yen; {{ index }}</span>
-                <div></div>
-              </div>
-            </li>
-           </ul>
-         </div>
-         <div class="shop-cart-list-mask" @click="isShowShopCart=false"></div>
-      </div>
-    </div>
-    <!-- 底部购物车 end -->
+    <shop-cart :selectFood="selectFood" :delivery-price="seller.deliveryPrice" :min-price="seller.minPrice"></shop-cart>
     <comm-transition name="slide">
       <goods-detail :food="food" @close-goods-detail="closeGoodsDetail" v-if="isShowGoodsDetail"></goods-detail>
     </comm-transition>
@@ -96,19 +50,24 @@ import request from 'utils/request'
 import GoodsDetail from 'components/goods/GoodsDetail'
 import CommTransition from 'common/components/CommTransition'
 import CartControl from 'components/cartcontrol/CartControl'
+import ShopCart from 'components/shopcart/shopcart.vue'
 import BScroll from 'better-scroll'
 export default {
-  name: 'ratings',
+  name: 'goods',
+  props: {
+    seller: {}
+  },
   data: () => ({
     titles: null,
     goods: null,
-    isShowShopCart: false,
     isShowGoodsDetail: false,
     food: null,
     // BScroll滚动过的距离
     scrollY: 0,
     // 当前索引
-    currentIndex: 0
+    currentIndex: 0,
+    // 选中的菜品
+    selectFood: []
   }),
   created () {
     this.classMap = ['decrease', 'discount', 'special', 'invoice', 'guarantee']
@@ -173,12 +132,37 @@ export default {
       if (this.GoodsWrapperScroll) {
         this.GoodsWrapperScroll.scrollToElement(this.$refs.goodsItems[index])
       }
+    },
+    handleAdd (food) {
+      console.log('增加物品啦', food)
+      if (!food.counter) {
+        this.$set(food, 'counter', 1)
+        this.selectFood.push(food)
+      } else {
+        food.counter++
+      }
+    },
+    handleDecrease (food) {
+      console.log('减少物品啦')
+      if (food.counter > 0) {
+        food.counter--
+      }
+      if (food.counter === 0) {
+        this.selectFood.some((fd, index) => {
+          let isSame = fd.name === food.name
+          if (isSame) {
+            this.selectFood.splice(index, 1)
+          }
+          return isSame
+        })
+      }
     }
   },
   components: {
     GoodsDetail,
     CommTransition,
-    CartControl
+    CartControl,
+    ShopCart
   },
   watch: {
     // 监听titles的变化，初始化better-scroll，或者刷新better-scroll
@@ -329,119 +313,4 @@ export default {
     img
       width: 100%
       height: 100%
-
-
-.shop-cart-wrapper
-  position: fixed
-  left: 0
-  right: 0
-  bottom: 0
-  width: 100%
-  height: (94 / 2)px
-  padding-left: ((36 - 22) / 2)px
-  font-size: 16px
-  font-weight: bold
-  color: rgba(255, 255, 255, 0.4)
-  background-color: #141d27
-  box-sizing: border-box
-.shop-cart-left
-
-  .price
-    padding: 0 12px
-.shop-cart-center
-  flex: 1
-  font-weight: normal
-  padding-left: 12px
-  &:before {
-      setLeftLine(rgba(255, 255, 255, 0.6))
-      margin-top: -5px
-      margin-bottom: -5px
-    }
-.shop-cart-right
-  box-sizing: border-box
-  width: (210/2)px
-  height: 100%
-  padding: 0 8px
-  font-size: 12px
-  line-height: (94 / 2)px
-  text-align: center
-  background-color: #2B333B
-
-.shop-cart-icon-outside
-  position: relative
-  margin-top: -11px
-  width: 56px
-  height: 56px
-  background-color: #141d27
-  border-radius: 50%
-.shop-cart-icon-inner
-  position: relative
-  width: 44px
-  height: 44px
-  border-radius: 50%
-  color: rgba(255, 255, 255, 0.4)
-  background-color: #2B343C
-  &.active
-    color: #fff
-    background-color: rgb(0, 160, 220)
-  .shop-cart-icon
-    font-size: 24px
-  .goods-number
-    position: absolute
-    top: -5px;
-    right: -11px;
-    width: 24px
-    height: 16px
-    line-height: 16px
-    font-size: 9px
-    font-weight: bold
-    border-radius: 12px
-    text-align: center
-    color: #ffffff
-    background-color: rgb(240, 20, 20)
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4)
-
-.shop-cart-list-wrapper
-  position: absolute
-  bottom: (94 / 2)px
-  left: 0
-  right: 0
-  width: 100%
-  color: rgb(7, 17, 27)
-  background-color: #fff
-  font-size: 14px
-  z-index: -1
-  overflow: hidden
-.shop-cart-list
-  position: relative
-  background: #fff
-  z-index: 11
-  .shop-cart-top
-    height: 40px
-    padding: 0 18px
-    border-bottom: 2px solid rgba(7, 17, 27, 0.1)
-    font-size: 12px
-    background-color: #f3f5f7
-  .shop-cart-title
-    font-size: 14px
-    color: rgb(7, 17, 27)
-    font-weight normal
-  .clear
-    color: rgb(0, 160, 220)
-  .goods-items-wrapper
-    padding: 0 18px
-  .goods-item
-    height: (96/2)px
-    margin: 0
-    padding: 12px 0
-    box-sizing: border-box
-
-.handle-wrapper
-  .price
-    color: rgb(240, 20, 20)
-    margin: 0 12px 0 18px
-.shop-cart-list-mask
-  fixed-element(-1, 0)
-  background-color: rgba(7, 17, 27, 0.6)
-  filter:blur(10px)
 </style>

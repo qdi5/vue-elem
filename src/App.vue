@@ -7,7 +7,7 @@
       <router-link class="nav-item" :to="{name: 'seller'}">商家</router-link>
     </nav>
     <main class="main-wrapper">
-      <router-view/>
+      <router-view :seller="seller" />
     </main>
   </div>
 </template>

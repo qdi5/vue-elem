@@ -17,6 +17,12 @@
 <script>
 export default {
   name: 'CartControl',
+  props: {
+    data: {
+      type: Object,
+      default: () => {}
+    }
+  },
   data () {
     return {
       number: 0
@@ -25,10 +31,12 @@ export default {
   methods: {
     add () {
       this.number++
+      this.$emit('add', this.data)
     },
     decrease () {
       if (this.number > 0) {
         this.number--
+        this.$emit('decrease', this.data)
       }
     }
   }
@@ -39,7 +47,7 @@ export default {
 .handle-btn-wrapper
   position: absolute
   right: 18px
-  bottom: 19px
+  bottom: 12px
 .handle-btn
   .decrease-wrapper,
   .add-wrapper
