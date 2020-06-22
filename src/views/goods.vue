@@ -30,7 +30,7 @@
                 <span class="origin-price" v-if="typeof food.oldPrice === 'number' && food.oldPrice >= 0">&yen;{{ food.oldPrice }}</span>
               </div>
               <!-- 加减按钮 begin-->
-              <cart-control @add="handleAdd" @decrease="handleDecrease" :data="food"></cart-control>
+              <cart-control @add="handleAdd" :number="food.counter" @decrease="handleDecrease" :data="food"></cart-control>
               <!-- 加减按钮 end-->
             </div>
           </div>

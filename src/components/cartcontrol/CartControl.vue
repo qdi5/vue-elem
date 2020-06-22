@@ -2,11 +2,11 @@
   <div class="handle-btn-wrapper" @click.stop.prevent>
     <div class="handle-btn flex-h flex-v-center" >
       <transition name="move">
-        <div v-if="number > 0" class="decrease-wrapper flex-h flex-v-center flex-h-center">
+        <div v-if="initNumber > 0" class="decrease-wrapper flex-h flex-v-center flex-h-center">
           <i class="icon-decrease icon-remove_circle_outline inner" @click="decrease"></i>
         </div>
       </transition>
-      <div v-if="number > 0" class="goods-number flex-h flex-v-center flex-h-center">{{ number }}</div>
+      <div v-if="initNumber > 0" class="goods-number flex-h flex-v-center flex-h-center">{{ initNumber }}</div>
       <div class="add-wrapper flex-h flex-v-center flex-h-center">
         <i class="icon-add icon-add_circle" @click="add"></i>
       </div>
@@ -21,23 +21,35 @@ export default {
     data: {
       type: Object,
       default: () => {}
+    },
+    number: {
+      type: Number,
+      default: 0
     }
   },
   data () {
     return {
-      number: 0
+      initNumber: this.number
     }
   },
   methods: {
     add () {
-      this.number++
+      this.initNumber++
       this.$emit('add', this.data)
     },
     decrease () {
-      if (this.number > 0) {
+      if (this.initNumber > 0) {
         this.number--
         this.$emit('decrease', this.data)
       }
+    }
+  },
+  watch: {
+    number (newVal) {
+      this.initNumber = newVal
+    },
+    initNumber (newVal) {
+      this.number = newVal
     }
   }
 }

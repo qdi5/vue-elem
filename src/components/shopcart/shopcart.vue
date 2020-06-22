@@ -17,10 +17,10 @@
     <div class="border-1px-l shop-cart-center">
       另需配送费&yen;{{ deliveryPrice }}元
     </div>
-    <div class="shop-cart-right" v-html="calcText" :class="payClass"></div>
+    <div class="shop-cart-right" @click.stop="sum" v-html="calcText" :class="payClass"></div>
     <!-- 购物车清单 -->
     <comm-transition name="fade">
-      <shop-list v-if="isShowShopCart" @close="isShowShopCart = false" :selectFood="selectFood"></shop-list>
+      <shop-list v-show="isShowShopCart" @close="isShowShopCart=false" :selectFood="selectFood"></shop-list>
     </comm-transition>
   </div>
   <!-- 底部购物车 end -->
@@ -50,6 +50,11 @@ export default {
   data () {
     return {
       isShowShopCart: false
+    }
+  },
+  methods: {
+    sum () {
+      alert(`合计：${this.totalPrice}元`)
     }
   },
   computed: {
@@ -136,8 +141,6 @@ export default {
   &.enough
     background: #00b43c;
     color: #fff;
-  
-
 .shop-cart-icon-outside
   position: relative
   margin-top: -11px
@@ -171,6 +174,4 @@ export default {
     color: #ffffff
     background-color: rgb(240, 20, 20)
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4)
-
-
 </style>
