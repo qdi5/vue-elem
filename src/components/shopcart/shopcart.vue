@@ -22,8 +22,24 @@
     <comm-transition name="fade">
       <shop-list v-show="isShowShopCart" @close="isShowShopCart=false" :selectFood="selectFood"></shop-list>
     </comm-transition>
+    <div class="ball-container">
+      <div v-for="(ball, index) in balls" :key="index">
+        <transition
+          name="drop"
+          @before-enter="beforeDrop"
+          @enter="dropping"
+          @after-enter="afterDrop"
+        >
+          <div class="ball" >
+            <div class="inner inner-hook"></div>
+          </div>
+        </transition>
+        
+      </div>
+    </div>
   </div>
   <!-- 底部购物车 end -->
+  
 </template>
 
 <script>
@@ -49,12 +65,71 @@ export default {
   },
   data () {
     return {
-      isShowShopCart: false
+      isShowShopCart: false,
+      // 原始小球数组
+      balls: [
+        {
+          show: false
+        },
+        {
+          show: false
+        },
+        {
+          show: false
+        },
+        {
+          show: false
+        },
+        {
+          show: false
+        }
+      ],
+      // 已经下落的小球
+      dropBalls: []
     }
   },
   methods: {
     sum () {
       alert(`合计：${this.totalPrice}元`)
+    },
+    // 小球下落的方法
+    drop (el) {
+      console.log('调用shopcart的drop方法', el)
+      // 从balls里面找到一个隐藏的小球，并放入dropBall里
+      for (let i = 0; i < this.balls.length; i++) {
+        let ball = this.balls[i]
+        if (!ball.show) {
+          ball.show = true
+          ball.el = el
+          this.dropBalls.push(ball)
+          return
+        }
+      }
+    },
+    beforeDrop (el) {
+      const ball = this.dropBalls[this.dropBalls.length - 1]
+      const rect = ball.el.getBoundingClientRect()
+      const x = rect.left - 32
+      const y = -(window.innerHeight - rect.top - 22)
+      el.style.display = ''
+      el.style.transform = `translate3d(0,${y}px,0)`
+      const inner = el.getElementsByClassName('inner-hook')[0]
+      inner.style.transform = `translate3d(${x}px,0,0)`
+    },
+    dropping (el, done) {
+      // 触发页面重绘，作用是？？？
+      this._reflow = document.body.offsetHeight
+      el.style.transform = `translate3d(0,0,0)`
+      const inner = el.getElementsByClassName('inner-hook')[0]
+      inner.style.transform = `translate3d(0,0,0)`
+      el.addEventListener('transitionend', done)
+    },
+    afterDrop (el) {
+      const ball = this.dropBalls.shift()
+      if (ball) {
+        ball.show = false
+        el.style.display = 'none'
+      }
     }
   },
   computed: {
@@ -174,4 +249,18 @@ export default {
     color: #ffffff
     background-color: rgb(240, 20, 20)
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4)
+.ball-container
+  .ball
+    position: fixed
+    left: 32px
+    bottom: 22px
+    z-index: 200
+    .inner
+      width: 16px
+      height: 16px
+      border-radius: 50%
+      background: rgb(0,100,220)
+      transition: all 0.4s
+.drop-enter-active
+  transition: all 0.4s
 </style>

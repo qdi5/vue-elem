@@ -8,7 +8,7 @@
       </transition>
       <div v-if="initNumber > 0" class="goods-number flex-h flex-v-center flex-h-center">{{ initNumber }}</div>
       <div class="add-wrapper flex-h flex-v-center flex-h-center">
-        <i class="icon-add icon-add_circle" @click="add"></i>
+        <i class="icon-add icon-add_circle" @click="add($event)"></i>
       </div>
     </div>
   </div>
@@ -33,9 +33,9 @@ export default {
     }
   },
   methods: {
-    add () {
+    add (event) {
       this.initNumber++
-      this.$emit('add', this.data)
+      this.$emit('add', this.data, event.target)
     },
     decrease () {
       if (this.initNumber > 0) {

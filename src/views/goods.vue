@@ -37,7 +37,7 @@
         </section>
       </div>
     </div>
-    <shop-cart :selectFood="selectFood" :delivery-price="seller.deliveryPrice" :min-price="seller.minPrice"></shop-cart>
+    <shop-cart ref="shopcart" :selectFood="selectFood" :delivery-price="seller.deliveryPrice" :min-price="seller.minPrice"></shop-cart>
     <comm-transition name="slide">
       <goods-detail :food="food" @close-goods-detail="closeGoodsDetail" v-if="isShowGoodsDetail"></goods-detail>
     </comm-transition>
@@ -133,8 +133,12 @@ export default {
         this.GoodsWrapperScroll.scrollToElement(this.$refs.goodsItems[index])
       }
     },
-    handleAdd (food) {
-      console.log('增加物品啦', food)
+    _drop (target) {
+      this.$refs.shopcart.drop(target)
+    },
+    handleAdd (food, target) {
+      console.log('增加物品啦', food, target)
+      this._drop(target)
       if (!food.counter) {
         this.$set(food, 'counter', 1)
         this.selectFood.push(food)
