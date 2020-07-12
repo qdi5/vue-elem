@@ -86,7 +86,7 @@ export default {
     }
   },
   created () {
-
+    this.dropBall = []
   },
   methods: {
     sum () {
@@ -94,17 +94,46 @@ export default {
     },
     // 小球下落的方法
     drop (el) {
-    // 找出一个小球，并将它显示
-
+      //  找出一个小球，并将它显示
+      this.balls.some(ball => {
+        if (ball) {
+          if (!ball.show) {
+            ball.show = true
+            ball.el = el
+            this.dropBall.push(ball)
+            return true
+          }
+        }
+      })
     },
+    // 这里的el是正在过渡的小球dom元素
     beforeDrop (el) {
-    
+      console.log('before-drop')
+      //  小球的初始位置
+      let ball = this.dropBall[this.dropBall.length - 1]
+      let rect = ball.el.getBoundingClientRect()
+      let x = rect.left - 23
+      let y = -(window.innerHeight - rect.top - 16)
+      el.style.display = ''
+      el.style.transform = el.style.webkitTransform = `translate3d(0,${y}px,0)`
+      let inner = el.getElementsByClassName('inner-hook')[0]
+      inner.style.transform = inner.style.webkitTransform = `translate3d(${x}px,0,0)`
     },
     dropping (el, done) {
-     
+      // 触发浏览器重绘
+      this.xxx = document.body.clientHeight
+
+      el.style.transform = el.style.webkitTransform = 'translate3d(0,0,0)'
+      let inner = el.getElementsByClassName('inner-hook')[0]
+      inner.style.transform = inner.webkitTransform = 'translate3d(0,0,0)'
+      el.addEventListener('transitionend', done)
     },
     afterDrop (el) {
-      
+      const ball = this.dropBall.shift()
+      if (ball) {
+        ball.show = false
+        el.style.display = 'none'
+      }
     }
   },
   computed: {
@@ -224,5 +253,20 @@ export default {
     color: #ffffff
     background-color: rgb(240, 20, 20)
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4)
+.ball-container
+  .ball  
+    position: fixed
+    left: 23px
+    bottom: 16px
+    transition: all .4s cubic-bezier(0.49, -0.29, 0.75, 0.41)
+    background: green
+    z-index: 200
+    .inner
+      width: 16px
+      height: 16px
+      background: red
+      border-radius: 50%
+      transition: all .4s linear
 
 </style>
+
