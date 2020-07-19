@@ -47,7 +47,7 @@ import CommTransition from 'common/components/CommTransition'
 import ShopList from 'components/shoplist/shoplist'
 export default {
   props: {
-    // 保存被选择的食物的数组
+    // 保存被选择的菜品的数组
     selectFood: {
       type: Array,
       default () {
@@ -114,7 +114,7 @@ export default {
       let rect = ball.el.getBoundingClientRect()
       let x = rect.left - 23
       let y = -(window.innerHeight - rect.top - 16)
-      el.style.display = ''
+      // el.style.display = ''
       el.style.transform = el.style.webkitTransform = `translate3d(0,${y}px,0)`
       let inner = el.getElementsByClassName('inner-hook')[0]
       inner.style.transform = inner.style.webkitTransform = `translate3d(${x}px,0,0)`

@@ -39,7 +39,7 @@ export default {
     },
     decrease () {
       if (this.initNumber > 0) {
-        this.number--
+        this.initNumber--
         this.$emit('decrease', this.data)
       }
     }
