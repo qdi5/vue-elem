@@ -2,9 +2,15 @@
   <div id="app">
     <v-header :seller="seller" :classMap="classMap"></v-header>
     <nav class="flex-h nowrap around nav border-1px-b">
-      <router-link class="nav-item" :to="{name: 'goods'}">商品</router-link>
-      <router-link class="nav-item" :to="{name: 'ratings'}">评价</router-link>
-      <router-link class="nav-item" :to="{name: 'seller'}">商家</router-link>
+      <div class="nav-item">
+        <router-link  :to="{name: 'goods'}">商品</router-link>
+      </div>
+      <div class="nav-item">
+        <router-link class="nav-item" :to="{name: 'ratings'}">评价</router-link>
+      </div>
+      <div class="nav-item">
+        <router-link :to="{name: 'seller'}">商家</router-link>
+      </div>
     </nav>
     <main class="main-wrapper">
       <router-view :seller="seller" />
@@ -34,8 +40,11 @@ export default {
 </script>
 <style lang="stylus">
 @import "~common/styles/index.styl"
+
 body
   safe-area-mixin(padding-bottom, bottom)
+  // 清除a标签点击后的背景阴影
+  -webkit-tap-highlight-color: transparent
 </style>
 <style lang="stylus" scoped>
 @import "~common/styles/index.styl"
