@@ -41,7 +41,7 @@
         <div class="popup">
           <div class="popup-header">
             <h1 class="title" v-if="seller">{{ seller.name }}</h1>
-            <rating-star :size="36"></rating-star>
+            <rating-star :size="36" class="rating-block"></rating-star>
           </div>
           <div class="discounts-info">
             <div class="flex-h flex-v-center theme-title">
@@ -293,4 +293,7 @@ header
     color: rgba(255, 255, 255, 0.5)
 /*=== sticky end ===*/
 /** popup样式 end */
+.rating-block {
+  display: block;
+}
 </style>

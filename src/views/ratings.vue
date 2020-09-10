@@ -1,178 +1,162 @@
 <template>
-  <div class="ratings">    
-    <div class="rating-info flex-h">
-      <div class="rating-score border-1px-r">
-        <div class="score">4.2</div>
-        <div class="text">综合评分</div>
-        <div class="percent">高于周边商家69.2%</div>
+  <div class="ratings" ref="ratings">
+    <div class="scroll-body">
+      <div class="rating-info flex-h">
+        <div class="rating-score border-1px-r">
+          <div class="score">4.2</div>
+          <div class="text">综合评分</div>
+          <div class="percent">高于周边商家69.2%</div>
+        </div>
+        <div class="rating-detail">
+          <div class="wrap flex-h flex-v-center">
+            <span class="type">服务态度</span>
+            <rating-star :score="3.9" :size="36"></rating-star>
+            <span class="score">3.9</span>
+          </div>
+          <div class="wrap flex-h flex-v-center">
+            <span class="type">商品评分</span>
+            <rating-star :score="4.0" :size="36"></rating-star>
+            <span class="score">4.0</span>
+          </div>
+          <div class="wrap flex-h flex-v-center">
+            <span class="type">送达时间</span>
+            <span class="delivery-time">44分钟</span>
+          </div>
+        </div>
       </div>
-      <div class="rating-detail">
-        <div class="wrap flex-h flex-v-center">
-          <span class="type">服务态度</span>
-          <span class="rating-star">
-            <i class="star-item"></i>
-            <i class="star-item"></i>
-            <i class="star-item"></i>
-            <i class="star-item half"></i>
-            <i class="star-item off"></i>
-          </span>
-          <span class="score">3.9</span>
+      <div class="split-area"></div>
+      <div class="goods-comments">
+        <div class="comments-header">
+          <div class="flex-h comments-btn-group border-1px-b">
+            <div class="comments-btn">全部 57</div>
+            <div class="comments-btn recommend">满意 47</div>
+            <div class="comments-btn bad">不满意 10</div>
+          </div>
+          <div class="filter border-1px-t">
+            <i class="icon-check_circle on"></i>
+            <span class="text">只看有内容的评价</span>  
+          </div>
         </div>
-        <div class="wrap flex-h flex-v-center">
-          <span class="type">商品评分</span>
-          <span class="rating-star">
-            <i class="star-item"></i>
-            <i class="star-item"></i>
-            <i class="star-item"></i>
-            <i class="star-item half"></i>
-            <i class="star-item off"></i>
-          </span>
-          <span class="score">4.0</span>
-        </div>
-        <div class="wrap flex-h flex-v-center">
-          <span class="type">送达时间</span>
-          <span class="delivery-time">44分钟</span>
+        <div class="comments-body">
+          <div class="comments-item border-1px-b">
+            <div class="item-wrap">
+              <div class="comment-top flex-h justify">
+                <div class="user flex-h">
+                  <img class="avatar" src="http://static.galileo.xiaojukeji.com/static/tms/default_header.png" alt="">
+                  <div class="name-star">
+                    <p class="nick-name">聚***家</p>
+                    <rating-star :score="4"></rating-star>
+                    <span class="delivery-time">
+                      80分钟送达
+                    </span>
+                  </div>
+                </div>
+                <div class="time">2020-05-16 13:29</div>
+              </div>
+              <div class="comment-text">
+                不错,粥很好喝,我经常吃这一家,非常赞,以后也会常来吃,强烈推荐.
+              </div>
+              <div class="goods-tags flex-h wrap">
+                <i class="icon-thumb_up icon"></i>
+                <span class="tag border-1px">南瓜粥</span>
+                <span class="tag border-1px">皮蛋瘦肉粥</span>
+                <span class="tag border-1px">扁豆焖面</span>
+                <span class="tag border-1px">娃娃菜炖豆腐</span>
+                <span class="tag border-1px">牛肉馅饼</span>
+              </div>
+            </div>
+            <div></div>
+            <div></div>
+          </div>
+          <div class="comments-item border-1px-b">
+            <div class="item-wrap">
+              <div class="comment-top flex-h justify">
+                <div class="user flex-h">
+                  <img class="avatar" src="http://static.galileo.xiaojukeji.com/static/tms/default_header.png" alt="">
+                  <div class="name-star">
+                    <p class="nick-name">聚***家</p>
+                    <rating-star :score="0"></rating-star>
+                    <span class="delivery-time">
+                      80分钟送达
+                    </span>
+                  </div>
+                </div>
+                <div class="time">2020-05-16 13:29</div>
+              </div>
+              <div class="comment-text">
+                不错,粥很好喝,我经常吃这一家,非常赞,以后也会常来吃,强烈推荐.
+              </div>
+              <div class="goods-tags flex-h wrap">
+                <i class="icon-thumb_up icon"></i>
+                <span class="tag border-1px">南瓜粥</span>
+                <span class="tag border-1px">皮蛋瘦肉粥</span>
+                <span class="tag border-1px">扁豆焖面</span>
+                <span class="tag border-1px">娃娃菜炖豆腐</span>
+                <span class="tag border-1px">牛肉馅饼</span>
+              </div>
+            </div>
+            <div></div>
+            <div></div>
+          </div>
+          <div class="comments-item border-1px-b">
+            <div class="item-wrap">
+              <div class="comment-top flex-h justify">
+                <div class="user flex-h">
+                  <img class="avatar" src="http://static.galileo.xiaojukeji.com/static/tms/default_header.png" alt="">
+                  <div class="name-star">
+                    <p class="nick-name">聚***家</p>
+                    <rating-star></rating-star>
+                    <span class="delivery-time">
+                      80分钟送达
+                    </span>
+                  </div>
+                </div>
+                <div class="time">2020-05-16 13:29</div>
+              </div>
+              <div class="comment-text">
+                不错,粥很好喝,我经常吃这一家,非常赞,以后也会常来吃,强烈推荐.
+              </div>
+              <div class="goods-tags flex-h wrap">
+                <i class="icon-thumb_down icon"></i>
+                <span class="tag border-1px">南瓜粥</span>
+                <span class="tag border-1px">皮蛋瘦肉粥</span>
+                <span class="tag border-1px">扁豆焖面</span>
+                <span class="tag border-1px">娃娃菜炖豆腐</span>
+                <span class="tag border-1px">牛肉馅饼</span>
+              </div>
+            </div>
+            <div></div>
+            <div></div>
+          </div>
         </div>
       </div>
     </div>
-    <div class="split-area"></div>
-    <div class="goods-comments">
-      <div class="comments-header">
-        <div class="flex-h comments-btn-group border-1px-b">
-          <div class="comments-btn">全部 57</div>
-          <div class="comments-btn recommend">满意 47</div>
-          <div class="comments-btn bad">不满意 10</div>
-        </div>
-        <div class="filter border-1px-t">
-          <i class="icon-check_circle on"></i>
-          <span class="text">只看有内容的评价</span>  
-        </div>
-      </div>
-      <div class="comments-body">
-        <div class="comments-item border-1px-b">
-          <div class="item-wrap">
-            <div class="comment-top flex-h justify">
-              <div class="user flex-h">
-                <img class="avatar" src="http://static.galileo.xiaojukeji.com/static/tms/default_header.png" alt="">
-                <div class="name-star">
-                  <p class="nick-name">聚***家</p>
-                  <span class="rating-star star-24">
-                    <i class="star-item"></i>
-                    <i class="star-item"></i>
-                    <i class="star-item"></i>
-                    <i class="star-item"></i>
-                    <i class="star-item"></i>
-                  </span>
-                  <span class="delivery-time">
-                    80分钟送达
-                  </span>
-                </div>
-              </div>
-              <div class="time">2020-05-16 13:29</div>
-            </div>
-            <div class="comment-text">
-              不错,粥很好喝,我经常吃这一家,非常赞,以后也会常来吃,强烈推荐.
-            </div>
-            <div class="goods-tags flex-h wrap">
-              <i class="icon-thumb_up icon"></i>
-              <span class="tag border-1px">南瓜粥</span>
-              <span class="tag border-1px">皮蛋瘦肉粥</span>
-              <span class="tag border-1px">扁豆焖面</span>
-              <span class="tag border-1px">娃娃菜炖豆腐</span>
-              <span class="tag border-1px">牛肉馅饼</span>
-            </div>
-          </div>
-          <div></div>
-          <div></div>
-        </div>
-        <div class="comments-item border-1px-b">
-          <div class="item-wrap">
-            <div class="comment-top flex-h justify">
-              <div class="user flex-h">
-                <img class="avatar" src="http://static.galileo.xiaojukeji.com/static/tms/default_header.png" alt="">
-                <div class="name-star">
-                  <p class="nick-name">聚***家</p>
-                  <span class="rating-star star-24">
-                    <i class="star-item"></i>
-                    <i class="star-item"></i>
-                    <i class="star-item"></i>
-                    <i class="star-item"></i>
-                    <i class="star-item"></i>
-                  </span>
-                  <span class="delivery-time">
-                    80分钟送达
-                  </span>
-                </div>
-              </div>
-              <div class="time">2020-05-16 13:29</div>
-            </div>
-            <div class="comment-text">
-              不错,粥很好喝,我经常吃这一家,非常赞,以后也会常来吃,强烈推荐.
-            </div>
-            <div class="goods-tags flex-h wrap">
-              <i class="icon-thumb_up icon"></i>
-              <span class="tag border-1px">南瓜粥</span>
-              <span class="tag border-1px">皮蛋瘦肉粥</span>
-              <span class="tag border-1px">扁豆焖面</span>
-              <span class="tag border-1px">娃娃菜炖豆腐</span>
-              <span class="tag border-1px">牛肉馅饼</span>
-            </div>
-          </div>
-          <div></div>
-          <div></div>
-        </div>
-        <div class="comments-item border-1px-b">
-          <div class="item-wrap">
-            <div class="comment-top flex-h justify">
-              <div class="user flex-h">
-                <img class="avatar" src="http://static.galileo.xiaojukeji.com/static/tms/default_header.png" alt="">
-                <div class="name-star">
-                  <p class="nick-name">聚***家</p>
-                  <span class="rating-star star-24">
-                    <i class="star-item"></i>
-                    <i class="star-item"></i>
-                    <i class="star-item"></i>
-                    <i class="star-item"></i>
-                    <i class="star-item"></i>
-                  </span>
-                  <span class="delivery-time">
-                    80分钟送达
-                  </span>
-                </div>
-              </div>
-              <div class="time">2020-05-16 13:29</div>
-            </div>
-            <div class="comment-text">
-              不错,粥很好喝,我经常吃这一家,非常赞,以后也会常来吃,强烈推荐.
-            </div>
-            <div class="goods-tags flex-h wrap">
-              <i class="icon-thumb_down icon"></i>
-              <span class="tag border-1px">南瓜粥</span>
-              <span class="tag border-1px">皮蛋瘦肉粥</span>
-              <span class="tag border-1px">扁豆焖面</span>
-              <span class="tag border-1px">娃娃菜炖豆腐</span>
-              <span class="tag border-1px">牛肉馅饼</span>
-            </div>
-          </div>
-          <div></div>
-          <div></div>
-        </div>
-      </div>
-    </div>
-    
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-
-
+import RatingStar from 'components/rating-star/rating-star.vue'
+import BScroll from 'better-scroll'
 export default {
-  name: 'ratings'
+  name: 'ratings',
+  mounted () {
+    this.BScroll = new BScroll(this.$refs.ratings, {
+      click: true
+    })
+  },
+  components: {
+    RatingStar
+  }
+
 }
 </script>
 
 <style scoped lang="stylus">
+.ratings {
+  height: 100%;
+  overflow: hidden;
+}
 .icon-thumb_up
   font-size: 12px
   line-height: 16px
@@ -219,6 +203,7 @@ export default {
         line-height: 18px
         font-size: 12px
         color: rgb(255,153,0)
+        margin-left: 6px
       .delivery-time
         font-size: 12px
         color: rgb(147, 153, 159)

@@ -229,12 +229,12 @@ export default {
   width: 12px
   height: 12px
   background-size: 12px 12px
-  bg-image('~@/special_3')
+  bg-image('~@/assets/images/special_3')
 .icon.discount
    width: 12px
    height: 12px
    background-size: 12px 12px
-   bg-image('~@/discount_1')
+   bg-image('~@/assets/images/discount_1')
 .goods-side-menu
   height: 100%
   width: 80px

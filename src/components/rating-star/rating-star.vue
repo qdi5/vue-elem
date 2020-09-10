@@ -1,11 +1,9 @@
 <template>
   <div class="ratings-wrapper">
     <div class="rating-star flex-h flex-h-center" :class="'star-'+size">
-      <span class="icon star-item" ></span>
-      <span class="icon star-item"></span>
-      <span class="icon star-item"></span>
-      <span class="icon star-item"></span>
-      <span class="icon star-item"></span>
+      <span class="icon star-item" v-for="i in totalData" :Key="i + 't'"></span>
+      <span class="icon star-item half" v-for="j in halfData" :key="j + 'h'"></span>
+      <span class="icon star-item off" v-for="k in emptyData" :Key="k + 'e'"></span>
     </div>
   </div>
 </template>
@@ -17,7 +15,20 @@ export default {
     size: {
       type: Number,
       default: 24
+    },
+    score: {
+      type: Number,
+      default: 5
     }
+  },
+  created () {
+    const score = this.score.toString()
+    const scoreArr = score.split('.')
+    const intNumber = Number(scoreArr[0])
+    const floatNumber = Number(scoreArr[1]) || 0
+    this.totalData = intNumber
+    this.halfData = floatNumber >= 5 ? 1 : 0
+    this.emptyData = 5 - intNumber - this.halfData
   }
 }
 </script>
@@ -26,6 +37,7 @@ export default {
 @import '~common/styles/mixin/mixin.styl'
 /* 评分组件 */
 .ratings-wrapper
+  display: inline-block
   text-align: center
 .rating-star
   display: inline-block
