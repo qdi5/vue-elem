@@ -20,8 +20,9 @@
         padding: 8px 12px
         font-size: 12px
         line-height:  16px
-        color: rgb(255,255,255)
-        background-color: rgb(0,160,220)
+        color: #4d555d
+        background-color: rgba(0, 160, 220, .2)
+        
         border-radius: 2px
         &.recommend, 
         &.bad {
@@ -33,6 +34,10 @@
         }
         &.bad {
           background-color: rgba(77,85,93,.2)
+        }
+        &.active {
+          background-color: rgb(0,160,220)
+          color: #fff;
         }
         & ~ .comments-btn {
           margin-left: 8px

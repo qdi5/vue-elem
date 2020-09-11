@@ -2,15 +2,9 @@
   <div id="app">
     <v-header :seller="seller" :classMap="classMap"></v-header>
     <nav class="flex-h nowrap around nav border-1px-b">
-      <div class="nav-item">
-        <router-link  :to="{name: 'goods'}">商品</router-link>
-      </div>
-      <div class="nav-item">
+        <router-link  :to="{name: 'goods'}" class="nav-item">商品</router-link>
         <router-link class="nav-item" :to="{name: 'ratings'}">评价</router-link>
-      </div>
-      <div class="nav-item">
-        <router-link :to="{name: 'seller'}">商家</router-link>
-      </div>
+        <router-link :to="{name: 'seller'}" class="nav-item">商家</router-link>
     </nav>
     <main class="main-wrapper">
       <router-view :seller="seller" />
@@ -50,7 +44,6 @@ body
 @import "~common/styles/index.styl"
 .main-wrapper
   fixed-element(10, 174)
-  bottom: 46px
 .nav
   height: 40px
   line-height: 40px
