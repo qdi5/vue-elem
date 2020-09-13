@@ -4,34 +4,28 @@
       <div class="seller-brief">
         <div class="seller-top flex-h border-1px-b">
           <div class="left">
-            <h1 class="name">粥品香坊（ 大运村 ）</h1>
-            <span class="rating-star seller-rating">
-              <i class="star-item"></i>
-              <i class="star-item"></i>
-              <i class="star-item"></i>
-              <i class="star-item half"></i>
-              <i class="star-item off"></i>
-            </span>
-            <span class="rating-number">(661)</span>
-            <span class="sale-number">月售690单</span>
+            <h1 class="name">{{ seller.name }}</h1>
+            <rating-star :size="36" :score="seller.score"></rating-star>
+            <span class="rating-number">({{ seller.ratingCount }})</span>
+            <span class="sale-number">月售{{ seller.sellCount }}单</span>
           </div>
           <div class="right">
-            <i class="icon-favorite active favorite-icon"></i>
-            <div class="collect">已收藏</div>
+            <i class="icon-favorite favorite-icon" :class="{ active: isFavorite }" @click="toggleFavorite"></i>
+            <div class="collect">{{ isFavorite ? '已收藏' : '收藏' }}</div>
           </div>
         </div>
         <div class="seller-detail flex-h">
           <div class="character">
             <div class="first">起送价</div>
-            <div><b>20</b>元</div>
+            <div><b>{{ seller.minPrice }}</b>元</div>
           </div>
           <div class="character border-1px-l">
             <div class="first">商家配送</div>
-            <div><b>4</b>元</div>
+            <div><b>{{ seller.deliveryPrice }}</b>元</div>
           </div>
           <div class="character border-1px-l">
             <div class="first">平均配送时间</div>
-            <div><b>39</b>分钟</div>
+            <div><b>{{ seller.deliveryTime }}</b>分钟</div>
           </div>
         </div>
       </div>
@@ -39,35 +33,31 @@
       <div class="broadcast border-1px-b">
         <div class="title">公告与活动</div>
         <p class="text border-1px-b">
-          粥品香坊其烹饪粥料的秘方源于中国千年古法，在融和现代制作工艺，由世界烹饪大师屈浩先生领衔研发。坚守纯天然、0添加的良心品质深得消费者青睐，发展至今成为粥类的引领品牌。是2008年奥运会和2013年园博会指定餐饮服务商。
+          {{ seller.bulletin }}
         </p>
         <ul class="promotion">
-          <li class="border-1px-b"><span class="bg-img decrease"></span><span>在线支付满28减5，满50减10</span>  </li>
-          <li class="border-1px-b"><span class="bg-img discount"></span><span>单人精彩赛</span> </li>
-          <li class="border-1px-b"><span class="bg-img discount"></span><span>清肺雪梨汤8折抢购</span> </li>
-          <li class="border-1px-b"><span class="bg-img special"></span><span>特价饮品八折抢购</span> </li>
-          <li class="border-1px-b"><span class="bg-img special"></span><span>单人特色套餐</span></li>
-          <li class="border-1px-b"><span class="bg-img invoice"></span><span>该商家支持开发票，请在下单时填写好发票抬头</span></li>
-          <li class="border-1px-b"><span class="bg-img guarantee"></span><span>以加入“外卖保”计划，食品安全保障</span></li>
+          <li class="border-1px-b" v-for="(item, index) in seller.supports" :key="index">
+            <span class="bg-img decrease" :class="classMap[item.type]"></span>
+            <span>{{ item.description }}</span>
+          </li>
         </ul>
       </div>
       <div class="split-area"></div>
       <div class="seller-photos">
         <div class="title">商家实景</div>
-        <div class="photos-wrap">
-          <img src="http://fuss10.elemecdn.com/8/71/c5cf5715740998d5040dda6e66abfjpeg.jpeg?imageView2/1/w/180/h/180" alt="">
-          <img src="http://fuss10.elemecdn.com/8/71/c5cf5715740998d5040dda6e66abfjpeg.jpeg?imageView2/1/w/180/h/180" alt="">
-          <img src="http://fuss10.elemecdn.com/8/71/c5cf5715740998d5040dda6e66abfjpeg.jpeg?imageView2/1/w/180/h/180" alt="">
+        <div class="photos-wrap" ref="photoswrap">
+          <div class="photo-scroll" ref="photoparent">
+            <img v-for="(pic, index) in seller.pics" :src="pic" :key="index" alt="">
+          </div>
         </div>
       </div>
       <div class="split-area"></div>
       <div class="seller-info">
         <div class="title">商家信息</div>
         <ul class="other-info">
-          <li class="border-1px-t">该商家支持发票,请下单写好发票抬头</li>
-          <li class="border-1px-t">品类:其他菜系,包子粥店</li>
-          <li class="border-1px-t">地址:北京市昌平区回龙观西大街龙观置业大厦底商B座102单元1340</li>
-          <li class="border-1px-t">营业时间:10:00-20:30</li>
+          <li class="border-1px-t" v-for="(info, index) in seller.infos" :key="index">
+            {{ info }}
+          </li>
         </ul>
       </div>
     </div> 
@@ -77,11 +67,68 @@
 <script>
 // @ is an alias to /src
 import BScroll from 'better-scroll'
-
+import RatingStar from 'components/rating-star/rating-star'
+import { saveToLocal, loadFromLocal } from 'common/js/store'
 export default {
   name: 'seller',
+  props: {
+    seller: {
+      type: Object
+    }
+  },
+  data () {
+    const _this = this
+    return {
+      isFavorite: loadFromLocal(_this.seller.id, 'favorite', false)
+    }
+  },
+  created () {
+    this.classMap = ['decrease', 'discount', 'special', 'invoice', 'guarantee']
+  },
   mounted () {
-    this.BScroll = new BScroll(this.$refs.seller)
+    this.BScroll = new BScroll(this.$refs.seller, {
+      click: true
+    })
+    this.photoScroll = new BScroll(this.$refs.photoswrap, {
+      scrollX: true,
+      scrollY: false
+    })
+  },
+  methods: {
+    toggleFavorite () {
+      this.isFavorite = !this.isFavorite
+      saveToLocal(this.seller.id, 'favorite', this.isFavorite)
+    },
+    calcPhotoparentWidth () {
+      debugger
+      const photoparent = this.$refs.photoparent
+      // const photoWidth = 120
+      const margin = 6 
+      const imgs = [...photoparent.querySelectorAll('img')]
+      let totalWidth = 0
+      imgs.forEach((item, index) => {
+        if (index < imgs.length - 1) {
+          totalWidth += item.offsetWidth + margin
+        } else {
+          totalWidth += item.offsetWidth
+        }
+      })
+      photoparent.style.width = totalWidth + 'px'
+    }
+  },
+  watch: {
+    'seller': {
+      handler () {
+        debugger
+        this.$nextTick().then(() => {
+          this.calcPhotoparentWidth()
+        })
+      },
+      immediate: true
+    }
+  },
+  components: {
+    RatingStar
   }
 }
 </script>
@@ -142,9 +189,11 @@ img
     .sale-number
       font-size: 10px
   .right
+    width: 50px;
     text-align: center
     .favorite-icon
       font-size: 24px
+      color: #d4d6d9;
       &.active
         color: #f01414
     .collect
@@ -192,17 +241,15 @@ img
   .title
     margin-bottom: 12px
   .photos-wrap
-    white-space: nowrap
-    overflow-x: auto
-    overflow-y: hidden
-    -webkit-overflow-scrolling: touch
-    -ms-overflow-style: none
+    width: 100%
+    overflow: hidden
     font-size: 0
-    /* 防止webkit浏览器中出现滚动条 */
-    &::-webkit-scrollbar
-      display: none
+    .photo-scroll
+      display: flex
     img 
       display: inline-block
+      width: 120px
+      height: 90px
       margin-right: 6px
 .seller-info
   padding: 18px

@@ -98,7 +98,6 @@ export default {
       }
       const data = pData.data
       const isOk = pData.errno === 0
-      debugger
       if (isOk) {
         this.ratings = data
       }

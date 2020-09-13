@@ -225,6 +225,8 @@ export default {
 @import '~common/styles/mixin/mixin.styl';
 .goods
   height: 100%
+  padding-bottom: 46px;
+  box-sizing: border-box;
 .icon.special
   width: 12px
   height: 12px
