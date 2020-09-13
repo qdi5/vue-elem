@@ -192,6 +192,7 @@ export default {
   color: rgba(255, 255, 255, 0.4)
   background-color: #141d27
   box-sizing: border-box
+  z-index: 103
 .shop-cart-left
   .price
     padding: 0 12px

@@ -1,58 +1,62 @@
 <template>
-  <div class="goods-detail-wrapper">
-    <div class="goods-detail">
-      <back-icon :clickAction="closeGoodsDetail"></back-icon>
-      <div class="flex-h food-detail border-1px-b">
-        <div class="food-img-wrapper">
-          <img :src="food.image" alt="food.name">
-        </div>
-        <div class="food-content">
-          <h3 class="food-name">{{ food.name }}</h3>
-          <div class="sales-status">
-            <span class="month-sales">月售{{ food.sellCount }}份</span>
-            <span class="good-rate">好评率{{ food.rating }}%</span>
+  <div class="goods-detail-wrapper" ref="goodsdetail">
+    <div class="scroll-body">
+      <div class="goods-detail">
+        <back-icon :clickAction="closeGoodsDetail"></back-icon>
+        <div class="flex-h food-detail border-1px-b">
+          <div class="food-img-wrapper">
+            <img :src="food.image" alt="food.name">
           </div>
-          <div class="prices">
-            <span class="sales-price">&yen;<span class="yen">{{ food.price }}</span> </span>
-            <span class="origin-price" v-if="typeof food.oldPrice === 'number' && food.oldPrice >= 0">&yen;<span class="yen">{{ food.oldPrice }}</span></span>
-          </div>
-          <div class="addcart-btn-wrapper">
-            <div class="addcart-btn">
-              加入购物车
+          <div class="food-content">
+            <h3 class="food-name">{{ food.name }}</h3>
+            <div class="sales-status">
+              <span class="month-sales">月售{{ food.sellCount }}份</span>
+              <span class="good-rate">好评率{{ food.rating }}%</span>
+            </div>
+            <div class="prices">
+              <span class="sales-price">&yen;<span class="yen">{{ food.price }}</span> </span>
+              <span class="origin-price" v-if="typeof food.oldPrice === 'number' && food.oldPrice >= 0">&yen;<span class="yen">{{ food.oldPrice }}</span></span>
+            </div>
+            <div class="addcart-btn-wrapper">
+              <cart-control ref="cc" v-if="isShow" @add="handleAdd" @decrease="handleDecrease" :number.sync="goodsNumber" :data="food"></cart-control>
+              <div v-else  class="addcart-btn" @click="addToCart">
+                加入购物车
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      <div class="split-area"></div>
-      <div class="goods-info">
-        <h1 class="title">商品介绍</h1>
-        <p class="goods-brief">
-          一碗皮蛋瘦肉粥，总是我到粥店时的不二之选。香浓软滑，饱腹暖心，皮蛋的Q弹与瘦肉的滑嫩伴着粥香溢于满口，让人喝这样的一碗粥也觉得心满意足
-        </p>
-      </div>
-      <div class="split-area"></div>
-    </div>
-    <div class="goods-comments">
-      <h2 class="title">商品评价</h2>
-      <div class="comments-header">
-        <div class="flex-h comments-btn-group border-1px-b">
-          <div class="comments-btn">全部 57</div>
-          <div class="comments-btn recommend">推荐 47</div>
-          <div class="comments-btn bad">吐槽 10</div>
-        </div>
-        <div class="filter border-1px-t">
-          <i class="icon-check_circle"></i>只看有内容的评价
-        </div>
-      </div>
-      <div class="comments-body border-1px-t">
-        <div class="comment-item border-1px-b">
-          <div class="head-wrap flex-h justify">
-            <div class="time">2020-05-16 00:23</div>
-            <div class="user">3******c <img class="avatar" src="http://static.galileo.xiaojukeji.com/static/tms/default_header.png" alt=""> </div>
-          </div>
-          <p class="comment-content">
-            <i class="icon icon-thumb_down"></i> 太少了，不够一个人吃
+        <div class="split-area"></div>
+        <div class="goods-info">
+          <h1 class="title">商品介绍</h1>
+          <p class="goods-brief">
+            {{ food.info }}
           </p>
+        </div>
+        <div class="split-area"></div>
+      </div>
+      <div class="goods-comments">
+        <h2 class="title">商品评价</h2>
+        <div class="comments-header">
+          <div class="flex-h comments-btn-group border-1px-b">
+            <div class="comments-btn">全部 57</div>
+            <div class="comments-btn recommend">推荐 47</div>
+            <div class="comments-btn bad">吐槽 10</div>
+          </div>
+          <div class="filter border-1px-t">
+            <i class="icon-check_circle"></i>只看有内容的评价
+          </div>
+        </div>
+        <div class="comments-body border-1px-t">
+          <div class="comment-item border-1px-b" v-for="rating in food.ratings" :key="rating.name">
+            <div class="head-wrap flex-h justify">
+              <div class="time">{{ rating.rateTime }}</div>
+              <div class="user">{{ rating.username }}<img class="avatar" :src="rating.avatar" alt=""> </div>
+            </div>
+            <p class="comment-content">
+              <i class="icon icon-thumb_down"></i>
+              {{ rating.text }}
+            </p>
+          </div>
         </div>
       </div>
     </div>
@@ -61,7 +65,8 @@
 
 <script>
 import BackIcon from 'common/components/BackIcon.vue'
-
+import BScroll from 'better-scroll'
+import CartControl from 'components/cartcontrol/CartControl'
 export default {
   props: {
     food: {
@@ -69,18 +74,63 @@ export default {
       default: () => null
     }
   },
+  created () {
+    console.log('food:\r\n', this.food)
+  },
+  mounted () {
+    this.BScroll = new BScroll(this.$refs.goodsdetail, {
+      click: true
+    })
+  },
   data () {
     return {
-
+      goodsNumber: 0,
+      isShow: false
     }
   },
   methods: {
     closeGoodsDetail () {
       this.$emit('close-goods-detail')
+    },
+    addToCart () {
+      this.isShow = true
+      this.$nextTick().then(() => {
+        debugger
+        console.log(this.$refs.cc.$el)
+        this.$refs.cc.$el.click()
+        // this.$refs.$emit('add')
+      })
+    },
+    handleAdd (food, target) {
+      console.log('增加物品啦', food, target)
+      this.$parent.$parent._drop(target)
+      if (!food.counter) {
+        this.$set(food, 'counter', 1)
+        debugger
+        this.$parent.$parent.$data.selectFood.push(food)
+      } else {
+        food.counter++
+      }
+    },
+    handleDecrease (food) {
+      console.log('减少物品啦')
+      if (food.counter > 0) {
+        food.counter--
+      }
+      if (food.counter === 0) {
+        this.$parent.$parent.$data.selectFood.some((fd, index) => {
+          let isSame = fd.name === food.name
+          if (isSame) {
+            this.selectFood.splice(index, 1)
+          }
+          return isSame
+        })
+      }
     }
   },
   components: {
-    BackIcon
+    BackIcon,
+    CartControl
   }
 }
 </script>
@@ -94,6 +144,7 @@ export default {
 
 .goods-detail-wrapper
   fixed-element()
+  bottom: 46px
 .food-img-wrapper
   width: 100%
   position: relative;
