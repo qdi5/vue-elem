@@ -49,7 +49,8 @@ export default {
       this.initNumber = newVal
     },
     initNumber (newVal) {
-      this.number = newVal
+      // this.number = newVal
+      this.$emit('sync', newVal)
     }
   }
 }

@@ -17,12 +17,14 @@
               <span class="sales-price">&yen;<span class="yen">{{ food.price }}</span> </span>
               <span class="origin-price" v-if="typeof food.oldPrice === 'number' && food.oldPrice >= 0">&yen;<span class="yen">{{ food.oldPrice }}</span></span>
             </div>
-            <div class="addcart-btn-wrapper">
-              <cart-control ref="cc" v-if="isShow" @add="handleAdd" @decrease="handleDecrease" :number.sync="goodsNumber" :data="food"></cart-control>
-              <div v-else  class="addcart-btn" @click="addToCart">
-                加入购物车
+            <cart-control ref="cc" @sync="handleSync" class="cart-control-diy" @add="handleAdd" @decrease="handleDecrease" :number.sync="goodsNumber" :data="food"></cart-control>
+            <comm-transition name="fade">
+              <div class="addcart-btn-wrapper" v-show="goodsNumber === 0">
+                <div class="addcart-btn" @click="addToCart($event)">
+                  加入购物车
+                </div>
               </div>
-            </div>
+            </comm-transition>
           </div>
         </div>
         <div class="split-area"></div>
@@ -67,6 +69,7 @@
 import BackIcon from 'common/components/BackIcon.vue'
 import BScroll from 'better-scroll'
 import CartControl from 'components/cartcontrol/CartControl'
+import CommTransition from 'common/components/CommTransition'
 export default {
   props: {
     food: {
@@ -84,7 +87,7 @@ export default {
   },
   data () {
     return {
-      goodsNumber: 0,
+      goodsNumber: this.food.counter || 0,
       isShow: false
     }
   },
@@ -92,14 +95,9 @@ export default {
     closeGoodsDetail () {
       this.$emit('close-goods-detail')
     },
-    addToCart () {
-      this.isShow = true
-      this.$nextTick().then(() => {
-        debugger
-        console.log(this.$refs.cc.$el)
-        this.$refs.cc.$el.click()
-        // this.$refs.$emit('add')
-      })
+    addToCart (event) {
+      this.goodsNumber = 1
+      this.handleAdd(this.food, event.target)
     },
     handleAdd (food, target) {
       console.log('增加物品啦', food, target)
@@ -121,16 +119,20 @@ export default {
         this.$parent.$parent.$data.selectFood.some((fd, index) => {
           let isSame = fd.name === food.name
           if (isSame) {
-            this.selectFood.splice(index, 1)
+            this.$parent.$parent.$data.selectFood.splice(index, 1)
           }
           return isSame
         })
       }
+    },
+    handleSync (val) {
+      this.goodsNumber = val
     }
   },
   components: {
     BackIcon,
-    CartControl
+    CartControl,
+    CommTransition
   }
 }
 </script>
@@ -190,6 +192,10 @@ export default {
     text-decoration: line-through
     .yen
       font-weight: 700
+.cart-control-diy
+  position: absolute 
+  right: 12px
+  bottom: 12px
 .addcart-btn-wrapper
   position:absolute;
   right:18px;
