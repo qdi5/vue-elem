@@ -102,15 +102,15 @@ export default {
     calcPhotoparentWidth () {
       debugger
       const photoparent = this.$refs.photoparent
-      // const photoWidth = 120
+      const photoWidth = 120
       const margin = 6 
       const imgs = [...photoparent.querySelectorAll('img')]
       let totalWidth = 0
       imgs.forEach((item, index) => {
         if (index < imgs.length - 1) {
-          totalWidth += item.offsetWidth + margin
+          totalWidth += photoWidth + margin
         } else {
-          totalWidth += item.offsetWidth
+          totalWidth += photoWidth
         }
       })
       photoparent.style.width = totalWidth + 'px'

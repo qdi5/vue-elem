@@ -40,16 +40,16 @@
         <h2 class="title">商品评价</h2>
         <div class="comments-header">
           <div class="flex-h comments-btn-group border-1px-b">
-            <div class="comments-btn">全部 57</div>
-            <div class="comments-btn recommend">推荐 47</div>
-            <div class="comments-btn bad">吐槽 10</div>
+            <div class="comments-btn" @click="filter='all'" :class="{ active: filter === 'all'}">全部 {{ food.ratings.length }}</div>
+            <div class="comments-btn recommend" @click="filter='good'" :class="{ active: filter === 'good'}">推荐 {{ goodNumber }}</div>
+            <div class="comments-btn bad" @click="filter='bad'" :class="{ active: filter === 'bad'}">吐槽 {{ badNumber }}</div>
           </div>
           <div class="filter border-1px-t">
-            <i class="icon-check_circle"></i>只看有内容的评价
+            <i class="icon-check_circle" :class="{ on: onlyContent }" @click="onlyContent = !onlyContent"></i>只看有内容的评价
           </div>
         </div>
         <div class="comments-body border-1px-t">
-          <div class="comment-item border-1px-b" v-for="rating in food.ratings" :key="rating.name">
+          <div class="comment-item border-1px-b" v-for="rating in filterRatings" :key="rating.name">
             <div class="head-wrap flex-h justify">
               <div class="time">{{ rating.rateTime }}</div>
               <div class="user">{{ rating.username }}<img class="avatar" :src="rating.avatar" alt=""> </div>
@@ -77,6 +77,14 @@ export default {
       default: () => null
     }
   },
+  data () {
+    return {
+      goodsNumber: this.food.counter || 0,
+      isShow: false,
+      onlyContent: true,
+      filter: 'all'
+    }
+  },
   created () {
     console.log('food:\r\n', this.food)
   },
@@ -85,12 +93,7 @@ export default {
       click: true
     })
   },
-  data () {
-    return {
-      goodsNumber: this.food.counter || 0,
-      isShow: false
-    }
-  },
+  
   methods: {
     closeGoodsDetail () {
       this.$emit('close-goods-detail')
@@ -127,6 +130,33 @@ export default {
     },
     handleSync (val) {
       this.goodsNumber = val
+    }
+  },
+  computed: {
+    goodNumber () {
+      return this.food.ratings.filter(item => item.rateType === 0).length
+    },
+    badNumber () {
+      return this.food.ratings.filter(item => item.rateType === 1).length
+    },
+    // 过滤评价
+    filterRatings () {
+      const ratings = this.food.ratings
+      // 展示所有评价
+      if (this.filter === 'all' && !this.onlyContent) {
+        return ratings
+      }
+      return ratings.filter(item => {
+        if (this.filter === 'all') {
+          return item.text.trim() !== ''
+        }
+        let condition = this.filter === 'good' ? item.rateType === 0 : item.rateType === 1
+        if (this.onlyContent) {
+          return condition && item.text.trim() !== ''
+        } else {
+          return condition
+        }
+      })
     }
   },
   components: {

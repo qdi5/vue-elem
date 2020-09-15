@@ -51,7 +51,7 @@
                     </span>
                   </div>
                 </div>
-                <div class="time">{{ rating.rateTime }}</div>
+                <div class="time">{{ formatter(rating.rateTime) }}</div>
               </div>
               <div class="comment-text">
                 {{ rating.text }}
@@ -75,6 +75,7 @@
 import request from 'utils/request'
 import RatingStar from 'components/rating-star/rating-star.vue'
 import BScroll from 'better-scroll'
+import { formatDate } from 'utils'
 export default {
   name: 'ratings',
   props: {
@@ -90,6 +91,7 @@ export default {
     }
   },
   created () {
+    this.formatDate = formatDate
     request.get('/api/ratings').then(response => {
       console.log(response)
       const pData = response.data
@@ -109,6 +111,11 @@ export default {
     this.BScroll = new BScroll(this.$refs.ratings, {
       click: true
     })
+  },
+  methods: {
+    formatter (str) {
+      return formatDate(str)
+    }
   },
   computed: {
     goodNumber () {
