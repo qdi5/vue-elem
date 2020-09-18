@@ -186,6 +186,7 @@ img
     .rating-number
       font-size: 10px
       margin-right: 12px
+      margin-left: 8px
     .sale-number
       font-size: 10px
   .right
@@ -197,6 +198,7 @@ img
       &.active
         color: #f01414
     .collect
+      margin-top: 4px
       font-size: 10px
       color: rgb(77,85,93)
       line-height: 10px
